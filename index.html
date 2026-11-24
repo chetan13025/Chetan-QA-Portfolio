@@ -374,7 +374,8 @@ toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');tog
 const links=[...nav.querySelectorAll('a')];const educationCard=document.querySelector('#education .panel.education');const contactCard=document.querySelector('#contact .panel.contact');const setCardHighlight=(target)=>{educationCard?.classList.toggle('is-highlighted',target==='#education');contactCard?.classList.toggle('is-highlighted',target==='#contact');};
 nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');links.forEach(link=>link.classList.toggle('active',link===a));setCardHighlight(a.getAttribute('href'));}));
 document.getElementById('year').textContent=new Date().getFullYear();
-setCardHighlight(null);\nconst observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){const target=location.hash==='#contact'?'#contact':'#'+e.target.id;links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===target));}}),{rootMargin:'-35% 0px -55% 0px'});
+setCardHighlight(null);
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){const target=location.hash==='#contact'?'#contact':'#'+e.target.id;links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===target));}}),{rootMargin:'-35% 0px -55% 0px'});
 document.querySelectorAll('main section[id]').forEach(s=>observer.observe(s));
 const frameworkObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');frameworkObserver.unobserve(e.target);}}),{threshold:.18});
 document.querySelectorAll('.framework-layer').forEach(layer=>frameworkObserver.observe(layer));
