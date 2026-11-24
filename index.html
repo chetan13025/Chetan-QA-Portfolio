@@ -278,7 +278,7 @@ footer{background:rgba(12,21,35,.6)}
 <script>
 const toggle=document.getElementById('menuToggle'),nav=document.getElementById('navLinks');
 toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));});
-nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');}));
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');links.forEach(link=>link.classList.toggle('active',link===a));educationCard?.classList.toggle('is-highlighted',a.getAttribute('href')==='#education');}));
 document.getElementById('year').textContent=new Date().getFullYear();
 const links=[...nav.querySelectorAll('a')];const educationCard=document.querySelector('#education .panel.education');const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));educationCard?.classList.toggle('is-highlighted',e.target.id==='education');}}),{rootMargin:'-35% 0px -55% 0px'});
 document.querySelectorAll('main section[id]').forEach(s=>observer.observe(s));
