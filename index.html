@@ -211,6 +211,27 @@ header{background:rgba(16,24,39,.9)}
 footer{background:rgba(12,21,35,.6)}
 
 
+
+.framework-section{position:relative;overflow:hidden;background:radial-gradient(ellipse at 82% 48%,rgba(56,189,248,.09),transparent 42%)}
+.framework-grid{display:grid;grid-template-columns:.88fr 1.12fr;gap:34px;align-items:center}
+.framework-copy h3{font-size:1.35rem;line-height:1.3;margin:0 0 13px;letter-spacing:-.03em}
+.framework-copy p{color:var(--muted);margin:0 0 15px;line-height:1.8}
+.framework-note{display:flex;gap:10px;margin-top:22px;padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(18,34,54,.68);color:var(--soft);font-size:.85rem}
+.framework-note strong{color:var(--cyan)}
+.framework-flow{display:grid;gap:9px}
+.framework-layer{display:grid;grid-template-columns:48px 1fr auto;gap:14px;align-items:center;padding:16px 18px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(110deg,rgba(25,43,65,.98),rgba(16,29,47,.98));box-shadow:0 12px 30px rgba(0,0,0,.16);opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease,border-color .25s ease,box-shadow .25s ease}
+.framework-layer.visible{opacity:1;transform:translateY(0)}
+.framework-layer:hover{border-color:var(--cyan);box-shadow:0 12px 34px rgba(56,189,248,.15);transform:translateY(-3px)}
+.framework-layer:nth-child(1){transition-delay:.04s}.framework-layer:nth-child(3){transition-delay:.10s}.framework-layer:nth-child(5){transition-delay:.16s}.framework-layer:nth-child(7){transition-delay:.22s}.framework-layer:nth-child(9){transition-delay:.28s}
+.framework-number{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.32);color:var(--cyan);font-weight:900}
+.framework-layer h3{margin:0 0 3px;font-size:1rem}.framework-layer p{margin:0;color:var(--muted);font-size:.82rem;line-height:1.5}
+.framework-tools{color:var(--cyan);font-size:.76rem;font-weight:800;text-align:right;max-width:150px}
+.framework-connector{height:17px;display:grid;place-items:center;color:var(--green);font-size:1.1rem}
+.framework-layer:last-child{border-color:rgba(56,189,248,.5);background:linear-gradient(110deg,rgba(14,47,61,.98),rgba(16,35,54,.98))}
+@media(max-width:800px){.framework-grid{grid-template-columns:1fr;gap:22px}}
+@media(max-width:480px){.framework-layer{grid-template-columns:40px 1fr;padding:14px;gap:11px}.framework-number{width:36px;height:36px}.framework-tools{grid-column:2;text-align:left;max-width:none}}
+@media(prefers-reduced-motion:reduce){.framework-layer{opacity:1;transform:none;transition:none}}
+
 /* Recruiter-focused impact highlights */
 .impact-section{padding:30px 0 54px;border-bottom:1px solid var(--line)}
 .impact-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
@@ -231,7 +252,7 @@ footer{background:rgba(12,21,35,.6)}
 <body>
 <header><div class="container nav">
 <a class="brand" href="#home"><span class="mark">&lt;/&gt;</span>Chetan Patil</a>
-<nav class="nav-links" id="navLinks" aria-label="Main navigation"><a href="#home" class="active">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#education">Education</a><a href="#contact">Contact</a></nav>
+<nav class="nav-links" id="navLinks" aria-label="Main navigation"><a href="#home" class="active">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#framework">Framework</a><a href="#education">Education</a><a href="#contact">Contact</a></nav>
 <a class="btn outline" href="assets/Chetan_Patil_Resume.pdf" download>↓ Resume</a><button class="menu" id="menuToggle" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
 </div></header>
 <main>
@@ -271,6 +292,17 @@ footer{background:rgba(12,21,35,.6)}
 <article class="project"><div class="project-heading"><div class="project-icon">▣</div><h3>Remarketing – b4traders.com</h3></div><p>Created 80+ UI regression tests for login, navigation and business workflows, and validated data synchronization between two web applications.</p><div class="tags"><span class="tag">Selenium</span><span class="tag">Java</span><span class="tag">TestNG</span></div></article>
 <article class="project"><div class="project-heading"><div class="project-icon">▯</div><h3>FTA – Field Team Automation</h3></div><p>Automated 100+ Appium mobile scenarios for tour-plan creation and implemented parallel Android execution, reducing test execution time by 60%.</p><div class="tags"><span class="tag">Appium</span><span class="tag">Android</span><span class="tag">TestNG</span></div></article>
 </div></div></section>
+<section id="framework" class="framework-section"><div class="container">
+<div class="section-head"><div class="kicker">05 / Framework approach</div><h2 class="section-title">Designed for maintainable automation.</h2><p class="muted" style="margin:13px 0 0;max-width:720px">A practical view of how test intent moves through reusable automation layers into reliable feedback.</p></div>
+<div class="framework-grid">
+<div class="framework-copy"><div class="kicker">Reusable layers. Clear feedback.</div><h3>Build once. Extend with confidence.</h3><p>Separating test scenarios from implementation keeps automation suites easier to maintain, debug and scale as applications evolve.</p><p>My toolkit includes Selenium with Java, Appium, REST Assured, TestNG, Maven, Jenkins and reporting integrations. I am also building hands-on capability with Playwright and TypeScript for modern web end-to-end testing.</p><div class="framework-note"><span aria-hidden="true">✦</span><span><strong>Architecture principle</strong><br>Keep tests readable, shared actions reusable, configuration centralized and results visible.</span></div></div>
+<div class="framework-flow" aria-label="Layered automation framework flow">
+<article class="framework-layer"><span class="framework-number">01</span><div><h3>Test scenarios</h3><p>Business flows, assertions and acceptance criteria</p></div><span class="framework-tools">TestNG · Cucumber</span></article><div class="framework-connector" aria-hidden="true">↓</div>
+<article class="framework-layer"><span class="framework-number">02</span><div><h3>Reusable interaction layer</h3><p>Page objects, API clients and mobile screen actions</p></div><span class="framework-tools">POM · API clients</span></article><div class="framework-connector" aria-hidden="true">↓</div>
+<article class="framework-layer"><span class="framework-number">03</span><div><h3>Utilities & configuration</h3><p>Waits, test data, helpers, environment settings</p></div><span class="framework-tools">Java · TypeScript</span></article><div class="framework-connector" aria-hidden="true">↓</div>
+<article class="framework-layer"><span class="framework-number">04</span><div><h3>Automation execution</h3><p>Browser, API and Android test execution</p></div><span class="framework-tools">Selenium · Appium · REST Assured</span></article><div class="framework-connector" aria-hidden="true">↓</div>
+<article class="framework-layer"><span class="framework-number">05</span><div><h3>Pipeline & reporting</h3><p>Continuous runs, test evidence and actionable results</p></div><span class="framework-tools">Maven · Jenkins · Allure</span></article>
+</div></div></div></section>
 <section id="education"><div class="container bottom"><div><div class="kicker">Technology stack</div><h2 class="section-title">Frameworks & Tools</h2><div class="panel tools"><span class="tool">Maven</span><span class="tool">Git</span><span class="tool">Jira</span><span class="tool">Azure DevOps</span><span class="tool">Jenkins</span><span class="tool">CI/CD</span><span class="tool">Linux</span><span class="tool">Windows</span><span class="tool">MongoDB</span><span class="tool">MySQL</span><span class="tool">Newman</span></div></div>
 <div><div class="kicker">Academic background</div><h2 class="section-title">Education</h2><div class="panel education"><div class="edu-icon">▰</div><div><strong>B.E (IPE)</strong><div class="muted">2017 – 2020</div></div></div></div>
 <div id="contact"><div class="kicker">Let's connect</div><h2 class="section-title">Get In Touch</h2><div class="panel contact"><a href="mailto:patilchetan256@gmail.com">✉ patilchetan256@gmail.com</a><a href="https://www.linkedin.com/in/chetan-patil-8bb225145" target="_blank" rel="noopener">in LinkedIn Profile</a><a href="https://github.com/chetan13025" target="_blank" rel="noopener">◉ github.com/chetan13025</a></div></div></div></section>
@@ -279,9 +311,12 @@ footer{background:rgba(12,21,35,.6)}
 <script>
 const toggle=document.getElementById('menuToggle'),nav=document.getElementById('navLinks');
 toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));});
+const links=[...nav.querySelectorAll('a')];const educationCard=document.querySelector('#education .panel.education');const contactCard=document.querySelector('#contact .panel.contact');const setCardHighlight=(target)=>{educationCard?.classList.toggle('is-highlighted',target==='#education');contactCard?.classList.toggle('is-highlighted',target==='#contact');};
 nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');links.forEach(link=>link.classList.toggle('active',link===a));setCardHighlight(a.getAttribute('href'));}));
 document.getElementById('year').textContent=new Date().getFullYear();
-const links=[...nav.querySelectorAll('a')];const educationCard=document.querySelector('#education .panel.education');const contactCard=document.querySelector('#contact .panel.contact');const setCardHighlight=(target)=>{educationCard?.classList.toggle('is-highlighted',target==='#education');contactCard?.classList.toggle('is-highlighted',target==='#contact');};const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){const target=location.hash==='#contact'?'#contact':'#'+e.target.id;links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===target));setCardHighlight(target);}}),{rootMargin:'-35% 0px -55% 0px'});
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){const target=location.hash==='#contact'?'#contact':'#'+e.target.id;links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===target));setCardHighlight(target);}}),{rootMargin:'-35% 0px -55% 0px'});
 document.querySelectorAll('main section[id]').forEach(s=>observer.observe(s));
+const frameworkObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');frameworkObserver.unobserve(e.target);}}),{threshold:.18});
+document.querySelectorAll('.framework-layer').forEach(layer=>frameworkObserver.observe(layer));
 </script>
 </body></html>
