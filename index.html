@@ -125,6 +125,56 @@ footer{border-top:1px solid var(--line);padding:24px 0;color:#b9c9d9;background:
   .footer{align-items:flex-start;flex-direction:column}
 }
 @media(max-width:390px){.container{width:calc(100% - 24px)}.hero-art{min-height:325px}.terminal{padding:16px}.terminal-label{font-size:.66rem}.checkline{font-size:.85rem}.float{font-size:.69rem}.skills{grid-template-columns:repeat(2,minmax(0,1fr))}.project-heading{gap:9px}.project-icon{flex-basis:38px;height:38px}}
+/* Mobile layout refinements */
+@media(max-width:700px){
+  html{scroll-padding-top:76px}
+  .container{width:calc(100% - 32px)}
+  .nav{gap:10px}
+  .nav-links{max-height:calc(100vh - 66px);overflow-y:auto}
+  .hero-grid{min-width:0}
+  .hero h1{font-size:clamp(2.65rem,12vw,4rem);overflow-wrap:anywhere}
+  .lead{font-size:.96rem;line-height:1.72}
+  .actions{display:grid;grid-template-columns:1fr;max-width:340px}
+  .actions .btn{width:100%;min-height:46px}
+  .hero-art{width:100%;min-width:0}
+  .terminal{max-width:100%}
+  .float{max-width:44%;white-space:normal;text-align:center}
+  .f1{left:0}.f2{right:0}.f3{right:0}
+  .skills{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .skill{min-width:0;overflow-wrap:anywhere}
+  .projects{grid-template-columns:minmax(0,1fr)}
+  .project{min-width:0}
+  .project-heading{flex-wrap:wrap}
+  .project-heading h3{flex:1 1 180px}
+  .badge{margin-left:0}
+  .tags{min-width:0}
+  .tag{max-width:100%;overflow-wrap:anywhere}
+  .about-grid,.bottom{grid-template-columns:minmax(0,1fr)}
+  .bottom>div:first-child{grid-column:auto}
+  .panel{min-width:0}
+  .facts{align-items:flex-start}
+  .fact{max-width:100%;overflow-wrap:anywhere}
+  .contact a{font-size:.9rem}
+  .footer{gap:10px}
+  .footer-links{flex-wrap:wrap}
+}
+@media(max-width:420px){
+  .container{width:calc(100% - 26px)}
+  .hero{padding-top:42px}
+  .hero-art{min-height:300px;padding:40px 0}
+  .orbit{width:75vw}
+  .terminal{padding:15px;border-radius:16px}
+  .checkline{font-size:.82rem;gap:8px}
+  .float{font-size:.66rem;padding:6px 8px}
+  section{padding:42px 0}
+  .section-title{font-size:1.8rem}
+  .skills{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .skill{min-height:82px}
+  .panel,.project{padding:16px;border-radius:15px}
+  .timeline{padding-left:22px}
+  .job:before{left:-19px}
+  .project-heading h3{font-size:.98rem}
+}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 </style>
 </head>
