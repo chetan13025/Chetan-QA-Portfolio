@@ -68,6 +68,11 @@ section{padding:66px 0}
 .skill:hover{transform:translateY(-4px);border-color:var(--cyan);background:rgba(19,52,79,.96)}
 .skill i{font-style:normal;font-size:1.42rem;color:var(--cyan);font-weight:900;line-height:1}
 .skill img{width:34px;height:34px;object-fit:contain;display:block}
+.brand-mark{width:34px;height:34px;display:grid;place-items:center;font-weight:950;line-height:1}
+.appium-mark{border-radius:50% 50% 50% 12%;transform:rotate(-45deg);background:linear-gradient(135deg,#ed3767,#8e315e);color:#fff;font-size:1.18rem;box-shadow:0 0 0 3px rgba(237,55,103,.12)}
+.appium-mark::first-letter{transform:rotate(45deg)}
+.allure-mark{border:3px solid #8b5cf6;border-radius:50%;color:#c4a7ff;font-family:Georgia,serif;font-size:1.55rem;box-shadow:inset 0 0 0 3px rgba(139,92,246,.12)}
+
 .skill-symbol{height:34px;display:grid;place-items:center;font-weight:950;line-height:1}
 .api-symbol{font-size:1.75rem;color:#42dff2;letter-spacing:-.1em}
 .testng-symbol{font-size:.86rem;color:#fff;background:linear-gradient(90deg,#f4f4f4 0 52%,#ed5965 52% 72%,#f3c84b 72%);-webkit-background-clip:text;background-clip:text}
@@ -139,13 +144,13 @@ footer{border-top:1px solid var(--line);padding:24px 0;color:#b9c9d9;background:
 <section id="skills"><div class="container"><div class="section-head"><div class="kicker">Tools I work with</div><h2 class="section-title">Technical Skills</h2></div><div class="skills">
 <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/selenium/selenium-original.svg" alt="Selenium logo">Selenium</div>
 <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/playwright/playwright-original.svg" alt="Playwright logo">Playwright</div>
-<div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/appium/appium-original.svg" alt="Appium logo">Appium</div>
+<div class="skill"><span class="brand-mark appium-mark" aria-label="Appium logo">A</span>Appium</div>
 <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java logo">Java</div>
 <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" alt="TypeScript logo">TypeScript</div>
 <div class="skill"><span class="skill-symbol api-symbol" aria-hidden="true">{ }</span>REST API</div>
 <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" alt="Postman logo">Postman</div>
 <div class="skill"><span class="skill-symbol testng-symbol" aria-hidden="true">TestNG</span>TestNG</div>
-<div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/allure/allure-original.svg" alt="Allure logo">Allure</div>
+<div class="skill"><span class="brand-mark allure-mark" aria-label="Allure logo">a</span>Allure</div>
 <div class="skill"><span class="skill-symbol extent-symbol" aria-hidden="true">E</span>Extent Report</div>
 <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" alt="Jenkins logo">Jenkins</div>
 </div></div></section>
