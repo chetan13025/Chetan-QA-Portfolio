@@ -110,6 +110,7 @@ ul.compact li{margin:6px 0;padding-left:3px}
 .tools{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
 .tool{background:rgba(16,43,69,.8);border:1px solid var(--line);padding:8px 11px;border-radius:10px;font-size:.84rem}
 .education{display:flex;gap:14px;align-items:center;margin-top:16px}
+.education.is-highlighted{border-color:var(--cyan);box-shadow:0 0 0 1px rgba(56,189,248,.28),0 0 28px rgba(56,189,248,.18);transform:translateY(-3px);transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease}
 .edu-icon{font-size:2rem;color:var(--green)}
 .contact{display:grid;gap:13px;margin-top:16px}
 .contact a{overflow-wrap:anywhere;transition:color .2s}
@@ -279,7 +280,7 @@ const toggle=document.getElementById('menuToggle'),nav=document.getElementById('
 toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));});
 nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');}));
 document.getElementById('year').textContent=new Date().getFullYear();
-const links=[...nav.querySelectorAll('a')];const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}),{rootMargin:'-35% 0px -55% 0px'});
+const links=[...nav.querySelectorAll('a')];const educationCard=document.querySelector('#education .panel.education');const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));educationCard?.classList.toggle('is-highlighted',e.target.id==='education');}}),{rootMargin:'-35% 0px -55% 0px'});
 document.querySelectorAll('main section[id]').forEach(s=>observer.observe(s));
 </script>
 </body></html>
