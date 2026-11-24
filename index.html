@@ -67,6 +67,13 @@ section{padding:66px 0}
 .skill{min-height:94px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:9px;text-align:center;padding:13px 8px;background:linear-gradient(145deg,rgba(15,42,68,.9),rgba(8,25,45,.95));border:1px solid var(--line);border-radius:15px;font-size:.85rem;font-weight:760;transition:transform .2s,border-color .2s,background .2s}
 .skill:hover{transform:translateY(-4px);border-color:var(--cyan);background:rgba(19,52,79,.96)}
 .skill i{font-style:normal;font-size:1.42rem;color:var(--cyan);font-weight:900;line-height:1}
+.skill img{width:34px;height:34px;object-fit:contain;display:block}
+.skill-symbol{height:34px;display:grid;place-items:center;font-weight:950;line-height:1}
+.api-symbol{font-size:1.75rem;color:#42dff2;letter-spacing:-.1em}
+.testng-symbol{font-size:.86rem;color:#fff;background:linear-gradient(90deg,#f4f4f4 0 52%,#ed5965 52% 72%,#f3c84b 72%);-webkit-background-clip:text;background-clip:text}
+.extent-symbol{width:34px;height:34px;border:3px solid #45a8df;border-radius:8px;color:#45a8df;font-size:1.35rem}
+.skill img[src$="appium-original.svg"],.skill img[src$="allure-original.svg"]{filter:drop-shadow(0 0 1px rgba(255,255,255,.3))}
+
 .timeline{position:relative;padding-left:29px}
 .timeline:before{content:"";position:absolute;left:9px;top:12px;bottom:12px;width:2px;background:linear-gradient(var(--green),var(--cyan),var(--purple))}
 .job{position:relative;margin-bottom:30px}
@@ -130,7 +137,17 @@ footer{border-top:1px solid var(--line);padding:24px 0;color:#b9c9d9;background:
 </div><div class="hero-art" aria-label="QA automation illustration"><div class="orbit"></div><span class="float f1">✓ Selenium</span><span class="float f2">API Testing</span><span class="float f3">◈ Playwright</span><div class="terminal"><div class="terminal-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="terminal-label">qa-automation.run</span></div><h3>Automation test suite</h3><div class="checkline"><span class="check">✓</span>Web automation</div><div class="checkline"><span class="check">✓</span>Mobile automation</div><div class="checkline"><span class="check">✓</span>API & backend validation</div><div class="checkline"><span class="check">✓</span>Regression testing</div><div class="checkline"><span class="check">✓</span>CI/CD integration</div></div></div></div></section>
 <section id="about"><div class="container"><div class="section-head"><div class="kicker">A little about me</div><h2 class="section-title">About Me</h2></div><div class="about-grid"><div class="panel"><p class="copy">I am a QA Automation Engineer with 4+ years of experience in functional and automation testing across Web, Mobile and APIs. I enjoy building automation frameworks, improving test coverage and bringing quality into every stage of the SDLC.</p><div class="facts"><span class="fact">⌖ <b>Bengaluru, India</b></span><span class="fact">◷ <b>4+ Years Experience</b></span><span class="fact">✉ <a href="mailto:patilchetan256@gmail.com">patilchetan256@gmail.com</a></span></div></div><div class="panel"><div class="kicker">How I work</div><h3>Quality from end to end</h3><p class="muted">Test strategy, UI and API automation, database checks, regression coverage, defect triage and release support in Agile teams.</p></div></div></div></section>
 <section id="skills"><div class="container"><div class="section-head"><div class="kicker">Tools I work with</div><h2 class="section-title">Technical Skills</h2></div><div class="skills">
-<div class="skill"><i>S</i>Selenium</div><div class="skill"><i>◈</i>Playwright</div><div class="skill"><i>A</i>Appium</div><div class="skill"><i>☕</i>Java</div><div class="skill"><i>TS</i>TypeScript</div><div class="skill"><i>{ }</i>REST API</div><div class="skill"><i>↗</i>Postman</div><div class="skill"><i>T</i>TestNG</div><div class="skill"><i>◉</i>Allure</div><div class="skill"><i>E</i>Extent Report</div><div class="skill"><i>J</i>Jenkins</div>
+<div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/selenium/selenium-original.svg" alt="Selenium logo">Selenium</div>
+<div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/playwright/playwright-original.svg" alt="Playwright logo">Playwright</div>
+<div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/appium/appium-original.svg" alt="Appium logo">Appium</div>
+<div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java logo">Java</div>
+<div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" alt="TypeScript logo">TypeScript</div>
+<div class="skill"><span class="skill-symbol api-symbol" aria-hidden="true">{ }</span>REST API</div>
+<div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" alt="Postman logo">Postman</div>
+<div class="skill"><span class="skill-symbol testng-symbol" aria-hidden="true">TestNG</span>TestNG</div>
+<div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/allure/allure-original.svg" alt="Allure logo">Allure</div>
+<div class="skill"><span class="skill-symbol extent-symbol" aria-hidden="true">E</span>Extent Report</div>
+<div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" alt="Jenkins logo">Jenkins</div>
 </div></div></section>
 <section id="experience"><div class="container"><div class="section-head"><div class="kicker">Career journey</div><h2 class="section-title">Work Experience</h2></div><div class="panel timeline">
 <article class="job"><h3>QA Engineer <span class="muted">| Digital Harbor | Bengaluru, India</span></h3><div class="meta">07/2025 – Present · <span class="current">Current</span></div>
