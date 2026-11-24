@@ -1,0 +1,1 @@
+Add the resume PDF to this folder and name it exactly Chetan_Patil_Resume.pdf. The website's resume buttons link to assets/Chetan_Patil_Resume.pdf.
