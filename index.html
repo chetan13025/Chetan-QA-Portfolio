@@ -278,21 +278,37 @@ body{overflow-x:hidden}
 }
 
 
-/* Framework approach — match the supplied reference layout */
+/* Framework approach — portfolio palette and motion */
 #framework{padding:72px 0 78px;background:transparent}
 #framework .section-head{margin-bottom:34px}
-#framework .kicker{color:#00e676;font-size:.78rem;letter-spacing:.16em;font-weight:850}
+#framework .kicker{color:var(--cyan);font-size:.78rem;letter-spacing:.16em;font-weight:850}
 #framework .section-title{font-size:clamp(2.25rem,3.1vw,3.25rem);letter-spacing:-.055em;line-height:1.12;margin-top:10px}
-#framework .section-title:after{width:56px;height:4px;margin-top:16px;background:#38bdf8}
-#framework .section-head>p{font-size:1.08rem!important;color:#9aaabd;margin-top:15px!important;line-height:1.5}
+#framework .section-title:after{width:56px;height:4px;margin-top:16px;background:var(--cyan)}
+#framework .section-head>p{font-size:1.08rem!important;color:var(--muted);margin-top:15px!important;line-height:1.5}
 #framework .framework-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:44px;align-items:center;margin-top:34px}
 #framework .framework-copy{align-self:center;padding-top:4px}
-#framework .framework-copy h3{font-size:1.42rem;letter-spacing:-.035em;margin:0 0 25px;color:#f1f5f9}
-#framework .framework-copy p{color:#9aaabd;font-size:1rem;line-height:1.8;margin:0 0 17px;max-width:690px}
-#framework .framework-flow{display:grid;gap:9px;align-content:center}
-#framework .framework-layer{min-height:55px;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px 18px;border:1px solid rgba(0,230,118,.24);border-radius:11px;background:#0e1b2b;font-weight:780;font-size:.94rem;color:#e5edf6}
-#framework .framework-layer.highlight{border-color:rgba(0,230,118,.58);background:rgba(0,230,118,.055);color:#00e676}
-#framework .framework-arrow{height:49px;display:grid;place-items:center;border:1px solid rgba(0,230,118,.24);border-radius:11px;background:#0e1b2b;color:#00e676;font-weight:900;font-size:1rem}
+#framework .framework-copy h3{font-size:1.42rem;letter-spacing:-.035em;margin:0 0 25px;color:var(--text)}
+#framework .framework-copy p{color:var(--muted);font-size:1rem;line-height:1.8;margin:0 0 17px;max-width:690px}
+#framework .framework-flow{display:grid;gap:9px;align-content:center;perspective:900px}
+#framework .framework-layer{min-height:55px;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px 18px;border:1px solid var(--line);border-radius:11px;background:linear-gradient(145deg,rgba(29,48,71,.92),rgba(18,34,54,.97));font-weight:780;font-size:.94rem;color:var(--text);box-shadow:0 8px 22px rgba(0,0,0,.12);animation:frameworkRise .65s both;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+#framework .framework-layer:nth-of-type(1){animation-delay:.08s}
+#framework .framework-layer:nth-of-type(3){animation-delay:.22s}
+#framework .framework-layer:nth-of-type(5){animation-delay:.36s}
+#framework .framework-layer:nth-of-type(7){animation-delay:.50s}
+#framework .framework-layer:nth-of-type(9){animation-delay:.64s}
+#framework .framework-layer:hover{transform:translateY(-3px);border-color:var(--line-strong);box-shadow:0 12px 28px rgba(56,189,248,.12)}
+#framework .framework-layer.highlight{border-color:var(--line-strong);background:rgba(56,189,248,.075);color:var(--cyan)}
+#framework .framework-arrow{height:49px;display:grid;place-items:center;border:1px solid var(--line);border-radius:11px;background:rgba(16,29,47,.82);color:var(--cyan);font-weight:900;font-size:1.1rem;animation:arrowBreathe 1.8s ease-in-out infinite}
+#framework .framework-arrow:nth-of-type(2){animation-delay:.15s}
+#framework .framework-arrow:nth-of-type(4){animation-delay:.35s}
+#framework .framework-arrow:nth-of-type(6){animation-delay:.55s}
+#framework .framework-arrow:nth-of-type(8){animation-delay:.75s}
+@keyframes frameworkRise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes arrowBreathe{0%,100%{color:var(--cyan);text-shadow:0 0 0 rgba(56,189,248,0)}50%{color:#9be3ff;text-shadow:0 0 12px rgba(56,189,248,.55)}}
+.nav-links a{position:relative;padding:8px 0}
+.nav-links a:after{content:"";position:absolute;left:0;right:100%;bottom:2px;height:2px;border-radius:3px;background:var(--cyan);transition:right .25s ease}
+.nav-links a:hover:after,.nav-links a.active:after{right:0}
+.nav-links a:hover,.nav-links a.active{color:var(--cyan)}
 @media(max-width:700px){
  #framework{padding:48px 0}
  #framework .section-title{font-size:2rem}
@@ -301,13 +317,17 @@ body{overflow-x:hidden}
  #framework .framework-copy p{font-size:.94rem}
  #framework .framework-layer{min-height:52px;font-size:.86rem;padding:11px}
  #framework .framework-arrow{height:43px}
+ .nav-links a:after{display:none}
 }
-</style>
+@media(prefers-reduced-motion:reduce){
+ #framework .framework-layer,#framework .framework-arrow{animation:none}
+ #framework .framework-layer,.nav-links a:after{transition:none}
+}</style>
 </head>
 <body>
 <header><div class="container nav">
 <a class="brand" href="#home"><span class="mark">&lt;/&gt;</span>Chetan Patil</a>
-<nav class="nav-links" id="navLinks" aria-label="Main navigation"><a href="#home" class="active">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#framework">Framework</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#education">Education</a><a href="#contact">Contact</a></nav>
+<nav class="nav-links" id="navLinks" aria-label="Main navigation"><a href="#home" class="active">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#framework">Framework</a><a href="#education">Education</a><a href="#contact">Contact</a></nav>
 <a class="btn outline" href="assets/Chetan_Patil_Resume.pdf" download>↓ Resume</a><button class="menu" id="menuToggle" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
 </div></header>
 <main>
