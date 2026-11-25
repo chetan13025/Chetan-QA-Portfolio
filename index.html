@@ -340,7 +340,34 @@ body{overflow-x:hidden}
 @media(prefers-reduced-motion:reduce){
  #framework .framework-layer,#framework .framework-arrow{animation:none}
  #framework .framework-layer,.nav-links a:after{transition:none}
-}</style>
+}
+/* Hero illustration spacing fix */
+.hero-art{min-height:440px;padding:76px 18px 70px;isolation:isolate}
+.hero-art .orbit{width:min(370px,78%);max-width:100%}
+.hero-art .terminal{width:min(430px,88%);justify-self:center;align-self:center}
+.hero-art .float{z-index:4}
+.hero-art .f1,.hero-art .f2{top:18px}
+.hero-art .f1{left:2%}
+.hero-art .f2{right:2%}
+.hero-art .f3{right:2%;bottom:18px}
+@media(max-width:980px){
+ .hero-art{min-height:410px;padding:68px 14px 62px}
+}
+@media(max-width:700px){
+ .hero-art{min-height:390px;padding:62px 10px 58px}
+ .hero-art .terminal{width:min(430px,94%)}
+ .hero-art .f1,.hero-art .f2{top:8px}
+ .hero-art .f1{left:0}
+ .hero-art .f2{right:0}
+ .hero-art .f3{right:0;bottom:8px}
+}
+@media(max-width:420px){
+ .hero-art{min-height:370px;padding:58px 6px 54px}
+ .hero-art .orbit{width:78vw}
+ .hero-art .terminal{width:96%}
+}
+
+</style>
 </head>
 <body>
 <header><div class="container nav">
