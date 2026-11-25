@@ -375,11 +375,41 @@ body{overflow-x:hidden}
 <script>
 const toggle=document.getElementById('menuToggle'),nav=document.getElementById('navLinks');
 toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));});
-const links=[...nav.querySelectorAll('a')];const educationCard=document.querySelector('#education .panel.education');const contactCard=document.querySelector('#contact .panel.contact');const setCardHighlight=(target)=>{educationCard?.classList.toggle('is-highlighted',target==='#education');contactCard?.classList.toggle('is-highlighted',target==='#contact');};
-nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');links.forEach(link=>link.classList.toggle('active',link===a));setCardHighlight(a.getAttribute('href'));}));
+const links=[...nav.querySelectorAll('a')];
+const educationCard=document.querySelector('#education .panel.education');
+const contactCard=document.querySelector('#contact .panel.contact');
+const setCardHighlight=(target)=>{
+  educationCard?.classList.toggle('is-highlighted',target==='#education');
+  contactCard?.classList.toggle('is-highlighted',target==='#contact');
+};
+const setActiveSection=(id)=>{
+  const target='#'+id;
+  links.forEach(a=>{
+    const active=a.getAttribute('href')===target;
+    a.classList.toggle('active',active);
+    if(active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');
+  });
+  setCardHighlight(target);
+};
+links.forEach(a=>a.addEventListener('click',()=>{
+  nav.classList.remove('open');
+  toggle.setAttribute('aria-expanded','false');
+  const target=a.getAttribute('href');
+  if(target?.startsWith('#'))setCardHighlight(target);
+}));
+toggle.addEventListener('keydown',e=>{if(e.key==='Escape'){nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');}});
 document.getElementById('year').textContent=new Date().getFullYear();
-setCardHighlight(null);
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){const target=location.hash==='#contact'?'#contact':'#'+e.target.id;links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===target));}}),{rootMargin:'-35% 0px -55% 0px'});
-document.querySelectorAll('main section[id]').forEach(s=>observer.observe(s));
+const observer=new IntersectionObserver(entries=>{
+  const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+  if(visible)setActiveSection(visible.target.id);
+},{rootMargin:'-28% 0px -58% 0px',threshold:[0,.15,.35,.6]});
+document.querySelectorAll('main section[id]').forEach(section=>observer.observe(section));
+const initialId=location.hash.slice(1);
+if(initialId&&document.getElementById(initialId))setActiveSection(initialId);
+else setActiveSection('home');
+window.addEventListener('hashchange',()=>{
+  const id=location.hash.slice(1);
+  if(id&&document.getElementById(id))setActiveSection(id);
+});
 </script>
 </body></html>
