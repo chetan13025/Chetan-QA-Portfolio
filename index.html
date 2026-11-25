@@ -277,12 +277,22 @@ body{overflow-x:hidden}
   .project:hover,.framework-layer:hover{transform:none}
 }
 
+
+.framework-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:42px;align-items:center;margin-top:34px}
+.framework-copy h3{font-size:1.35rem;letter-spacing:-.03em;margin:0 0 22px}
+.framework-copy p{color:var(--muted);font-size:1rem;line-height:1.8;margin:0 0 16px}
+.framework-flow{display:grid;gap:9px}
+.framework-layer{min-height:55px;display:grid;place-items:center;text-align:center;padding:13px 16px;border:1px solid var(--line);border-radius:12px;background:rgba(16,30,48,.82);font-weight:780;color:#eaf3ff}
+.framework-layer.highlight{border-color:rgba(56,189,248,.58);background:rgba(7,35,43,.72);color:var(--cyan)}
+.framework-arrow{display:grid;place-items:center;min-height:30px;border:1px solid var(--line);border-radius:11px;background:rgba(16,30,48,.72);color:var(--green);font-weight:900}
+@media(max-width:700px){.framework-grid{grid-template-columns:1fr;gap:25px}.framework-copy h3{font-size:1.2rem}.framework-layer{min-height:52px;font-size:.88rem}}
+
 </style>
 </head>
 <body>
 <header><div class="container nav">
 <a class="brand" href="#home"><span class="mark">&lt;/&gt;</span>Chetan Patil</a>
-<nav class="nav-links" id="navLinks" aria-label="Main navigation"><a href="#home" class="active">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#education">Education</a><a href="#contact">Contact</a></nav>
+<nav class="nav-links" id="navLinks" aria-label="Main navigation"><a href="#home" class="active">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#framework">Framework</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#education">Education</a><a href="#contact">Contact</a></nav>
 <a class="btn outline" href="assets/Chetan_Patil_Resume.pdf" download>↓ Resume</a><button class="menu" id="menuToggle" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
 </div></header>
 <main>
@@ -306,6 +316,7 @@ body{overflow-x:hidden}
 <div class="skill"><img class="brand-logo extent-logo" src="https://raw.githubusercontent.com/extent-framework/extentreports-java/master/src/main/resources/com/aventstack/extentreports/offline/commons/img/logo.png" alt="Official ExtentReports logo">Extent Report</div>
 <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" alt="Jenkins logo">Jenkins</div>
 </div></div></section>
+<section id="framework"><div class="container"><div class="section-head"><div class="kicker">05 / Framework approach</div><h2 class="section-title">Designed for maintainable automation.</h2><p class="muted" style="font-size:1.05rem;margin:12px 0 0">A simplified view of a layered automation framework and delivery pipeline.</p></div><div class="framework-grid"><div class="framework-copy"><h3>Reusable layers. Clear feedback.</h3><p>Separating test intent from implementation helps keep automation suites easier to maintain, debug and extend as workflows evolve.</p><p>My automation toolkit includes Selenium Java, Appium, REST Assured, TestNG, Maven, Jenkins and reporting integrations. I am also building hands-on capability with Playwright and TypeScript for modern web E2E testing. This diagram illustrates a typical framework structure, not a claim that every project used an identical architecture.</p></div><div class="framework-flow" aria-label="Simplified automation framework layers"><div class="framework-layer highlight">Test scenarios · TestNG · Cucumber</div><div class="framework-arrow">↓</div><div class="framework-layer">Page Objects · API clients · Mobile screens</div><div class="framework-arrow">↓</div><div class="framework-layer">Utilities · Waits · Test data · Config</div><div class="framework-arrow">↓</div><div class="framework-layer highlight">Selenium · Appium · REST Assured</div><div class="framework-arrow">↓</div><div class="framework-layer">Maven · Jenkins · Allure / Extent Reports</div></div></div></div></section>
 <section id="experience"><div class="container"><div class="section-head"><div class="kicker">Career journey</div><h2 class="section-title">Work Experience</h2></div><div class="panel timeline">
 <article class="job"><h3>QA Engineer <span class="muted">| Digital Harbor | Bengaluru, India</span></h3><div class="meta">07/2025 – Present · <span class="current">Current</span></div>
 <div class="subhead">Yoodle – Enterprise Collaboration Platform</div><ul class="compact"><li>Designed end-to-end UI, API and backend test strategy across web, desktop and mobile platforms.</li><li>Executed functional, regression, integration, smoke and exploratory testing across collaboration modules to support feature quality and system reliability.</li><li>Collaborated with developers and product owners in Agile sprints to triage defects and support release sign-off.</li></ul>
