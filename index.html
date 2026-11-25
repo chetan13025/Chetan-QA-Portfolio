@@ -372,6 +372,16 @@ body{overflow-x:hidden}
 .skill img.testng-logo{width:58px;height:36px;object-fit:contain;background:#fff;border-radius:5px;padding:3px}
 .skill img.cucumber-logo{width:36px;height:36px;object-fit:contain;filter:drop-shadow(0 0 1px rgba(255,255,255,.2))}
 
+
+/* Logo-led API, data, build and reporting skill chips */
+.skill-tags.logo-tags{align-items:center;gap:10px}
+.skill-tags.logo-tags>span{display:inline-flex;align-items:center;gap:9px;min-height:48px;padding:8px 13px;border:1px solid var(--line);border-radius:13px;background:rgba(31,52,76,.82);color:#e5f1fc;font-size:.84rem;font-weight:700}
+.skill-tags.logo-tags img{width:27px;height:27px;object-fit:contain;flex:0 0 27px}
+.skill-tags.logo-tags img[alt="REST Assured logo"]{width:72px;max-width:72px;height:27px;object-fit:contain;background:#fff;border-radius:5px;padding:2px}
+.skill-tags.logo-tags img[alt="Allure logo"]{padding:2px;border-radius:50%;background:#fff}
+.tool-monogram{width:27px;height:27px;display:grid;place-items:center;flex:0 0 27px;border:2px solid #42a5f5;border-radius:6px;color:#42a5f5;font-weight:950;font-size:1rem}
+@media(max-width:700px){.skill-tags.logo-tags>span{font-size:.78rem;padding:7px 10px;min-height:44px}.skill-tags.logo-tags img{width:24px;height:24px;flex-basis:24px}}
+
 </style>
 </head>
 <body>
@@ -401,8 +411,22 @@ body{overflow-x:hidden}
 <div class="skill"><img class="brand-logo testng-logo" src="https://docs.testit.software/images/integrations/testng.png" alt="TestNG logo">TestNG</div>
 <div class="skill"><img class="brand-logo cucumber-logo" src="https://cdn.simpleicons.org/cucumber/23A55A" alt="Cucumber logo">Cucumber</div>
 </div></div>
-<div class="skill-group"><h3>API, Data & Validation</h3><div class="skill-tags"><span>REST Assured</span><span>Postman</span><span>Newman</span><span>MySQL</span><span>MongoDB</span><span>JSON validation</span></div></div>
-<div class="skill-group"><h3>Build, CI/CD & Reporting</h3><div class="skill-tags"><span>Maven</span><span>Jenkins</span><span>Git</span><span>Allure Report</span><span>Extent Reports</span><span>Jira</span></div></div>
+<div class="skill-group"><h3>API, Data & Validation</h3><div class="skill-tags logo-tags">
+<span><img src="https://raw.githubusercontent.com/rest-assured/rest-assured/master/rest-assured-logo-green.png" alt="REST Assured logo">REST Assured</span>
+<span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" alt="Postman logo">Postman</span>
+<span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" alt="Postman logo">Newman</span>
+<span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" alt="MySQL logo">MySQL</span>
+<span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" alt="MongoDB logo">MongoDB</span>
+<span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/json/json-original.svg" alt="JSON logo">JSON validation</span>
+</div></div>
+<div class="skill-group"><h3>Build, CI/CD & Reporting</h3><div class="skill-tags logo-tags">
+<span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/maven/maven-original.svg" alt="Apache Maven logo">Maven</span>
+<span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" alt="Jenkins logo">Jenkins</span>
+<span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git logo">Git</span>
+<span><img src="https://cdn.simpleicons.org/allure/FFFFFF" alt="Allure logo">Allure Report</span>
+<span><span class="tool-monogram extent-monogram" aria-hidden="true">E</span>Extent Reports</span>
+<span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jira/jira-original.svg" alt="Jira logo">Jira</span>
+</div></div>
 <div class="skill-group"><h3>Testing Practices</h3><div class="skill-tags"><span>Functional & Regression Testing</span><span>Smoke & Sanity Testing</span><span>Integration Testing</span><span>Exploratory Testing</span><span>Database Validation</span><span>Agile / Scrum</span></div></div>
 </div></div></section>
 <section id="experience"><div class="container"><div class="section-head"><div class="kicker">Career journey</div><h2 class="section-title">Work Experience</h2></div><div class="panel timeline">
