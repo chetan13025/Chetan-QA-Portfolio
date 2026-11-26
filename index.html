@@ -439,6 +439,49 @@ html{scroll-padding-top:112px}
 /* Animation runs only while the framework section is in view */
 #framework .framework-flow-footer,#framework .framework-flow-status,#framework .framework-replay{display:none!important}
 
+
+/* Horizontal GitLab + Jenkins CI/CD pipeline */
+#framework .framework-flow.cicd-flow{display:block;min-width:0;padding:18px 12px;border:1px solid rgba(74,166,211,.28);border-radius:18px;background:linear-gradient(145deg,rgba(10,24,41,.97),rgba(14,31,49,.99));box-shadow:0 18px 44px rgba(0,0,0,.18);overflow:hidden}
+#framework .cicd-track{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;position:relative}
+#framework .cicd-stage{position:relative;min-width:0;text-align:center}
+#framework .cicd-card{height:78px;border:1px solid #315c7b;border-radius:15px;background:linear-gradient(145deg,#1a334b,#12263b);display:grid;place-items:center;position:relative;z-index:1;transition:border-color .25s,box-shadow .25s,background .25s,transform .25s}
+#framework .cicd-icon{font-size:27px;line-height:1;color:#58d9ff;font-weight:800;transition:transform .25s,text-shadow .25s}
+#framework .cicd-stage strong{display:block;margin-top:10px;font-size:.78rem;line-height:1.4;color:#fff}
+#framework .cicd-stage small{display:block;margin-top:5px;color:#c6d9e9;font-size:.65rem;line-height:1.45}
+#framework .cicd-stage.active .cicd-card{border-color:#49ddff;background:linear-gradient(145deg,#1b4762,#15314a);box-shadow:0 0 0 1px #49ddff50,0 0 25px #25caff55,0 0 48px #25caff22;transform:translateY(-4px)}
+#framework .cicd-stage.active .cicd-icon{transform:scale(1.18);text-shadow:0 0 16px #52ddff}
+#framework .cicd-connector{position:absolute;z-index:2;height:3px;background:#34546e;top:38px;left:calc(50% + 40px);width:calc(100% - 72px);overflow:hidden}
+#framework .cicd-connector:after{content:"";position:absolute;top:0;left:-35%;width:35%;height:100%;background:linear-gradient(90deg,transparent,#54e6ff,#fff,transparent);box-shadow:0 0 12px #54dfff;opacity:0}
+#framework .cicd-connector.active:after{opacity:1;animation:cicdBeam .65s linear infinite}
+#framework .cicd-progress{height:3px;background:#203d56;border-radius:5px;margin-top:18px;overflow:hidden}
+#framework .cicd-progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,#37bdf1,#fff,#65e5c0);box-shadow:0 0 10px #4bd8ff}
+#framework .cicd-flow.is-running .cicd-progress span{animation:cicdProgress 5s linear infinite}
+#framework .cicd-caption{margin-top:12px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:.68rem;color:#c5d9e9}
+#framework .cicd-caption span:first-child{color:#71e0ff;font-weight:700}
+@keyframes cicdBeam{to{left:100%}}
+@keyframes cicdProgress{to{width:100%}}
+@media(max-width:700px){
+ #framework .framework-flow.cicd-flow{padding:14px 8px}
+ #framework .cicd-track{gap:4px}
+ #framework .cicd-card{height:60px;border-radius:10px}
+ #framework .cicd-icon{font-size:21px}
+ #framework .cicd-connector{top:29px;left:calc(50% + 26px);width:calc(100% - 48px)}
+ #framework .cicd-stage strong{font-size:.63rem;margin-top:8px}
+ #framework .cicd-stage small{font-size:.56rem}
+ #framework .cicd-caption{font-size:.6rem}
+}
+@media(max-width:390px){
+ #framework .cicd-track{gap:2px}
+ #framework .cicd-card{height:52px}
+ #framework .cicd-icon{font-size:18px}
+ #framework .cicd-stage strong{font-size:.58rem}
+ #framework .cicd-stage small{font-size:.51rem}
+}
+@media(prefers-reduced-motion:reduce){
+ #framework .cicd-stage,#framework .cicd-card,#framework .cicd-icon{transition:none}
+ #framework .cicd-flow.is-running .cicd-progress span,#framework .cicd-connector.active:after{animation:none}
+}
+
 </style>
 </head>
 <body>
@@ -503,17 +546,16 @@ html{scroll-padding-top:112px}
 <article class="project"><div class="project-heading"><div class="project-icon">▯</div><h3>FTA – Field Team Automation</h3></div><p>Automated mobile scenarios for tour-plan creation and implemented parallel execution across Android devices.</p><div class="project-detail"><strong>Contribution:</strong> 100+ Appium mobile scenarios, reducing test execution time by 60%.</div><div class="tags"><span class="tag">Appium</span><span class="tag">Android</span><span class="tag">TestNG</span></div></article>
 </div></div></section>
 </div></div></section>
-<section id="framework"><div class="container"><div class="section-head"><div class="kicker">Framework approach</div><h2 class="section-title">Designed for maintainable automation.</h2><p class="muted" style="font-size:1.05rem;margin:12px 0 0">A simplified view of a layered automation framework and delivery pipeline.</p></div><div class="framework-grid"><div class="framework-copy"><h3>Reusable layers. Clear feedback.</h3><p>Separating test intent from implementation helps keep automation suites easier to maintain, debug and extend as workflows evolve.</p><p>My automation toolkit includes Selenium Java, Appium, REST Assured, TestNG, Maven, Jenkins and reporting integrations. I am also building hands-on capability with Playwright and TypeScript for modern web E2E testing. This diagram illustrates a typical framework structure, not a claim that every project used an identical architecture.</p></div><div class="framework-flow circuit-flow" id="frameworkFlow" aria-label="Simplified automation framework layers">
-<div class="framework-node"><span class="framework-node-icon" aria-hidden="true">✓</span><span class="framework-node-copy"><strong>Test Scenarios</strong><small>TestNG · Cucumber</small></span></div>
-<div class="framework-wire" aria-hidden="true"></div>
-<div class="framework-node"><span class="framework-node-icon" aria-hidden="true">▣</span><span class="framework-node-copy"><strong>Page Object &amp; Client Layer</strong><small>Page Objects · API Clients · Mobile Screens</small></span></div>
-<div class="framework-wire" aria-hidden="true"></div>
-<div class="framework-node"><span class="framework-node-icon" aria-hidden="true">⚙</span><span class="framework-node-copy"><strong>Core Utilities</strong><small>Waits · Test Data · Configuration</small></span></div>
-<div class="framework-wire" aria-hidden="true"></div>
-<div class="framework-node"><span class="framework-node-icon" aria-hidden="true">⌘</span><span class="framework-node-copy"><strong>Automation Engines</strong><small>Selenium · Appium · REST Assured</small></span></div>
-<div class="framework-wire" aria-hidden="true"></div>
-<div class="framework-node"><span class="framework-node-icon" aria-hidden="true">▤</span><span class="framework-node-copy"><strong>Build &amp; Reporting</strong><small>Maven · Jenkins · Allure / Extent Reports</small></span></div>
-
+<section id="framework"><div class="container"><div class="section-head"><div class="kicker">CI/CD workflow</div><h2 class="section-title">From GitLab commit to test reports.</h2><p class="muted" style="font-size:1.05rem;margin:12px 0 0">A typical QA automation pipeline using GitLab for source control and Jenkins to orchestrate build, test execution and reporting.</p></div><div class="framework-grid"><div class="framework-copy"><h3>Automated builds. Continuous feedback.</h3><p>A code push or merge request in GitLab can trigger Jenkins, which checks out the latest changes and runs the Maven build and configured automation suites.</p><p>Test execution can cover UI, mobile and API checks using Selenium, Appium and REST Assured, with results published through Allure or Extent Reports. The flow below illustrates a typical pipeline and does not imply that every stage is configured identically in every project.</p></div><div class="framework-flow cicd-flow" id="frameworkFlow" aria-label="GitLab and Jenkins QA automation CI/CD pipeline">
+<div class="cicd-track">
+<div class="cicd-stage"><div class="cicd-card"><span class="cicd-icon" aria-hidden="true">⌘</span></div><strong>Code Commit</strong><small>GitLab · Push / Merge</small><span class="cicd-connector" aria-hidden="true"></span></div>
+<div class="cicd-stage"><div class="cicd-card"><span class="cicd-icon" aria-hidden="true">⚙</span></div><strong>Build</strong><small>Jenkins · Maven</small><span class="cicd-connector" aria-hidden="true"></span></div>
+<div class="cicd-stage"><div class="cicd-card"><span class="cicd-icon" aria-hidden="true">✓</span></div><strong>Test Execution</strong><small>TestNG · Cucumber</small><span class="cicd-connector" aria-hidden="true"></span></div>
+<div class="cicd-stage"><div class="cicd-card"><span class="cicd-icon" aria-hidden="true">▣</span></div><strong>Automation</strong><small>Selenium · Appium · REST Assured</small><span class="cicd-connector" aria-hidden="true"></span></div>
+<div class="cicd-stage"><div class="cicd-card"><span class="cicd-icon" aria-hidden="true">▤</span></div><strong>Reports</strong><small>Allure · Extent Reports</small></div>
+</div>
+<div class="cicd-progress" aria-hidden="true"><span></span></div>
+<div class="cicd-caption"><span id="frameworkFlowStatus">● Pipeline ready</span><span>GitLab → Jenkins → Maven → Tests → Reports</span></div>
 </div></div></div></section>
 <section id="education"><div class="container bottom"><div><div class="kicker">Academic background</div><h2 class="section-title">Education</h2><div class="panel education"><div class="edu-icon">▰</div><div><strong>B.E (IPE)</strong><div class="muted">2017 – 2020</div></div></div></div>
 <div id="contact"><div class="kicker">Let's connect</div><h2 class="section-title">Get In Touch</h2><div class="panel contact"><a href="mailto:patilchetan256@gmail.com">✉ patilchetan256@gmail.com</a><a href="tel:+918217480083">☎ +91 82174 80083</a><a href="https://www.linkedin.com/in/chetan-patil-8bb225145" target="_blank" rel="noopener">in LinkedIn Profile</a><a href="https://github.com/chetan13025" target="_blank" rel="noopener">◉ github.com/chetan13025</a></div></div></div></section>
@@ -573,30 +615,37 @@ window.addEventListener('hashchange',()=>{
 (()=>{
  const flow=document.getElementById('frameworkFlow');
  if(!flow)return;
+ const stages=[...flow.querySelectorAll('.cicd-stage')];
+ const connectors=[...flow.querySelectorAll('.cicd-connector')];
+ const status=document.getElementById('frameworkFlowStatus');
  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- if(reduced)return;
- let cycleTimer=null;
- const playCycle=()=>{
-   flow.classList.remove('is-visible');
-   void flow.offsetWidth;
-   flow.classList.add('is-visible');
+ let timer=null,index=0;
+ const labels=['GitLab code commit','Jenkins + Maven build','TestNG / Cucumber execution','Selenium · Appium · REST Assured','Allure / Extent report publishing'];
+ const stop=()=>{
+   if(timer!==null){window.clearInterval(timer);timer=null;}
+   stages.forEach(stage=>stage.classList.remove('active'));
+   connectors.forEach(line=>line.classList.remove('active'));
+   flow.classList.remove('is-running');
+   if(status)status.textContent='● Pipeline paused';
  };
  const start=()=>{
-   if(cycleTimer!==null)return;
-   playCycle();
-   cycleTimer=window.setInterval(playCycle,3600);
+   if(reduced||timer!==null)return;
+   index=0;
+   flow.classList.add('is-running');
+   const step=()=>{
+     stages.forEach((stage,i)=>stage.classList.toggle('active',i===index));
+     connectors.forEach((line,i)=>line.classList.toggle('active',i===index));
+     if(status)status.textContent='● '+labels[index];
+     index=(index+1)%stages.length;
+   };
+   step();
+   timer=window.setInterval(step,1000);
  };
- const stop=()=>{
-   if(cycleTimer!==null){window.clearInterval(cycleTimer);cycleTimer=null;}
-   flow.classList.remove('is-visible');
- };
+ if(reduced){if(status)status.textContent='● CI/CD pipeline';return;}
  if('IntersectionObserver' in window){
    const observer=new IntersectionObserver(entries=>{
-     entries.forEach(entry=>{
-       if(entry.isIntersecting)start();
-       else stop();
-     });
-   },{threshold:.25});
+     entries.forEach(entry=>entry.isIntersecting?start():stop());
+   },{threshold:.3});
    observer.observe(flow);
  }else start();
 })();
