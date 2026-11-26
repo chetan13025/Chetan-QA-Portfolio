@@ -694,40 +694,70 @@ window.addEventListener('hashchange',()=>{
 (()=>{
  const flow=document.getElementById('frameworkFlow');
  if(!flow)return;
- const testCell=document.getElementById('jenkinsTestCell');
- const reportCell=document.getElementById('jenkinsReportCell');
+ const row=flow.querySelector('.jenkins-build');
+ if(!row)return;
+ const cells=[...row.querySelectorAll('.jenkins-cell')];
  const status=document.getElementById('frameworkFlowStatus');
- if(!testCell||!reportCell)return;
+ const names=['Checkout','Maven Build','Test Execution','Publish Reports'];
+ const durations=[1800,2100,3000,1600];
  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- let started=false,timer=null;
- const finish=()=>{
-   testCell.classList.remove('current');
-   testCell.classList.add('finished-running');
-   testCell.innerHTML='<strong>✓ Passed</strong><small>All tests passed · 2m 14s</small>';
-   reportCell.classList.remove('skipped');
-   reportCell.classList.add('report-running');
-   reportCell.innerHTML='<strong>● Publishing</strong><small>Generating test reports</small>';
-   if(status)status.textContent='● Build #248 · Publishing reports';
-   timer=setTimeout(()=>{
-     reportCell.classList.remove('report-running');
-     reportCell.classList.add('success');
-     reportCell.innerHTML='<strong>✓ Published</strong><small>Allure · Extent Reports</small>';
-     if(status)status.textContent='✓ Build #248 completed · All stages successful';
-   },850);
+ let timer=0,raf=0,active=false,observer=null;
+ const reset=()=>{
+   cells.forEach(cell=>{
+     cell.className='jenkins-cell skipped';
+     cell.innerHTML='<strong>◷ Waiting</strong><small>Queued</small><div class="jenkins-progress"><i></i></div>';
+   });
  };
- const start=()=>{
-   if(started)return;
-   started=true;
-   if(reduced){finish();return;}
-   if(status)status.textContent='● Build #248 · Test Execution running';
-   timer=setTimeout(finish,2300);
+ const stop=()=>{
+   active=false;
+   clearTimeout(timer);
+   cancelAnimationFrame(raf);
+   timer=raf=0;
+   reset();
+   if(status)status.textContent='● Build #248 · Ready to run';
  };
+ const run=()=>{
+   if(active)return;
+   active=true;
+   let index=0;
+   const next=()=>{
+     if(!active)return;
+     if(index>=cells.length){
+       if(status)status.textContent='✓ Build #248 completed · Restarting pipeline';
+       timer=setTimeout(()=>{reset();index=0;next();},900);
+       return;
+     }
+     const cell=cells[index],stage=index,duration=durations[index],started=performance.now();
+     cell.className='jenkins-cell current';
+     cell.innerHTML='<strong>● Running</strong><small>0% complete</small><div class="jenkins-progress"><i></i></div>';
+     const bar=cell.querySelector('.jenkins-progress i');
+     if(status)status.textContent='● Build #248 · '+names[index]+' running';
+     const frame=now=>{
+       if(!active)return;
+       const progress=Math.min(1,(now-started)/duration);
+       bar.style.transform='scaleX('+progress+')';
+       cell.querySelector('small').textContent=Math.round(progress*100)+'% complete';
+       if(progress<1){raf=requestAnimationFrame(frame);return;}
+       cell.className='jenkins-cell success';
+       cell.innerHTML='<strong>✓ Passed</strong><small>'+names[stage]+' completed</small>';
+       index++;
+       timer=setTimeout(next,300);
+     };
+     raf=requestAnimationFrame(frame);
+   };
+   next();
+ };
+ if(reduced){
+   cells.forEach((cell,i)=>{cell.className='jenkins-cell success';cell.innerHTML='<strong>✓ Passed</strong><small>'+names[i]+' completed</small>';});
+   if(status)status.textContent='✓ Build #248 · All stages passed';
+   return;
+ }
  if('IntersectionObserver'in window){
-   const observer=new IntersectionObserver(entries=>{
-     if(entries.some(entry=>entry.isIntersecting)){start();observer.disconnect();}
+   observer=new IntersectionObserver(entries=>{
+     entries.forEach(entry=>entry.isIntersecting?run():stop());
    },{threshold:.25});
    observer.observe(flow);
- }else start();
+ }else run();
 })();
 </script>
 
