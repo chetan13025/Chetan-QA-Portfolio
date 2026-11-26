@@ -484,6 +484,23 @@ html{scroll-padding-top:112px}
 
 
 /* Jenkins Stage View-inspired QA pipeline dashboard */
+
+/* Compact sequential Jenkins stage cards */
+#framework .jenkins-sequential-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+#framework .jenkins-sequential-stage{min-width:0;padding:16px 10px;border:1px solid #405b75;border-radius:9px;background:#20344b;text-align:center}
+#framework .jenkins-sequential-stage h3{margin:0 0 20px;color:#f4f8ff;font-size:.85rem;font-weight:650}
+#framework .jenkins-sequential-duration{font-size:.78rem;color:#c9e2f6;margin-bottom:14px}
+#framework .jenkins-sequential-track{height:7px;background:#435a70;border-radius:8px;overflow:hidden}
+#framework .jenkins-sequential-track i{display:block;width:100%;height:100%;background:#62bdf2;transform:scaleX(0);transform-origin:left;border-radius:8px}
+#framework .jenkins-sequential-stage .jenkins-sequential-state{margin-top:13px;min-height:16px;color:#c9d9e8;font-size:.75rem}
+#framework .jenkins-sequential-stage.active{border-color:#4bd5ff;box-shadow:0 0 13px #2bbffb50}
+#framework .jenkins-sequential-stage.active .jenkins-sequential-state{color:#79ddff}
+#framework .jenkins-sequential-stage.done{border-color:#3c916c;background:#173b32}
+#framework .jenkins-sequential-stage.done .jenkins-sequential-track i{background:#55c995;transform:scaleX(1)}
+#framework .jenkins-sequential-stage.done .jenkins-sequential-state{color:#a8e9c9}
+@media(max-width:700px){#framework .jenkins-sequential-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#framework .jenkins-sequential-stage{padding:14px 8px}}
+@media(prefers-reduced-motion:reduce){#framework .jenkins-sequential-stage{transition:none}}
+
 #framework .framework-flow.jenkins-stage-view{display:block;min-width:0;padding:18px;border:1px solid rgba(74,166,211,.3);border-radius:16px;background:linear-gradient(145deg,#0d1a2b,#12243a);box-shadow:0 18px 44px rgba(0,0,0,.18);overflow:hidden}
 #framework .jenkins-view-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
 #framework .jenkins-view-head strong{font-size:.95rem;color:#f5f9ff}
@@ -590,15 +607,15 @@ html{scroll-padding-top:112px}
 <article class="project"><div class="project-heading"><div class="project-icon">▯</div><h3>FTA – Field Team Automation</h3></div><p>Automated mobile scenarios for tour-plan creation and implemented parallel execution across Android devices.</p><div class="project-detail"><strong>Contribution:</strong> 100+ Appium mobile scenarios, reducing test execution time by 60%.</div><div class="tags"><span class="tag">Appium</span><span class="tag">Android</span><span class="tag">TestNG</span></div></article>
 </div></div></section>
 </div></div></section>
-<section id="framework"><div class="container"><div class="section-head"><div class="kicker">CI/CD workflow</div><h2 class="section-title">Jenkins pipeline stage view.</h2><p class="muted" style="font-size:1.05rem;margin:12px 0 0">A Jenkins-style view of a QA automation pipeline, with GitLab as the source repository and Jenkins orchestrating build, test and reporting stages.</p></div><div class="framework-copy"><h3>Build visibility. Test feedback.</h3><p>A GitLab push or merge request can trigger Jenkins to check out the latest code, run the Maven build, execute configured UI, mobile and API automation suites, and publish test reports.</p><p>The stage view below is an illustrative design, not a live Jenkins connection. Build identifiers, durations and outcomes are sample values.</p></div><div class="framework-flow jenkins-stage-view" id="frameworkFlow" aria-label="Illustrative Jenkins stage view for GitLab QA automation pipeline">
+<section id="framework"><div class="container"><div class="section-head"><div class="kicker">CI/CD workflow</div><h2 class="section-title">Jenkins pipeline stage view.</h2><p class="muted" style="font-size:1.05rem;margin:12px 0 0">A Jenkins-style view of a QA automation pipeline, with GitLab as the source repository and Jenkins orchestrating build, test and reporting stages.</p></div><div class="framework-copy"><h3>Build visibility. Test feedback.</h3><p>A GitLab push or merge request can trigger Jenkins to check out the latest code, run the Maven build, execute configured UI, mobile and API automation suites, and publish test reports.</p><p>The stage view below is an illustrative design, not a live Jenkins connection. Build identifiers, durations and outcomes are sample values.</p></div><div class="framework-flow jenkins-stage-view jenkins-sequential" id="frameworkFlow" aria-label="Animated Jenkins QA pipeline stages">
 <div class="jenkins-view-head"><strong>Jenkins · QA Automation Pipeline</strong><span>GITLAB INTEGRATION</span></div>
-<div class="jenkins-table-wrap"><table class="jenkins-table"><thead><tr><th>Build history</th><th>Checkout</th><th>Maven Build</th><th>Test Execution</th><th>Publish Reports</th></tr></thead><tbody>
-<tr class="jenkins-average"><td>Average stage times</td><td>8s<div class="jenkins-timebar"><i style="width:25%"></i></div></td><td>18s<div class="jenkins-timebar"><i style="width:48%"></i></div></td><td>2m 14s<div class="jenkins-timebar"><i style="width:90%"></i></div></td><td>6s<div class="jenkins-timebar"><i style="width:20%"></i></div></td></tr>
-<tr class="jenkins-build"><td><span class="jenkins-build-id">Build 2</span><span class="jenkins-date">Yoodle</span></td><td class="jenkins-cell success"><strong>8s</strong><small>Success</small></td><td class="jenkins-cell success"><strong>18s</strong><small>Success</small></td><td class="jenkins-cell success"><strong>2m 14s</strong><small>Passed</small></td><td class="jenkins-cell success"><strong>6s</strong><small>Published</small></td></tr>
-<tr class="jenkins-build"><td><span class="jenkins-build-id failed-id">Build 1</span><span class="jenkins-date">SET Project</span></td><td class="jenkins-cell success"><strong>7s</strong><small>Success</small></td><td class="jenkins-cell success"><strong>17s</strong><small>Success</small></td><td class="jenkins-cell failed"><strong>36s</strong><small>Failed</small></td><td class="jenkins-cell skipped"><strong>—</strong><small>Skipped</small></td></tr>
-</tbody></table></div>
-<div class="jenkins-legend"><span><i class="passed-dot"></i>Passed</span><span><i class="failed-dot"></i>Failed</span><span><i class="running-dot"></i>Running</span><span><i class="skipped-dot"></i>Skipped</span></div>
-<div class="jenkins-view-footer"><span id="frameworkFlowStatus">● Ready · illustrative stage view</span><span>GitLab → Jenkins → Maven → Tests → Reports</span></div>
+<div class="jenkins-sequential-grid">
+<div class="jenkins-sequential-stage"><h3>Checkout</h3><div class="jenkins-sequential-duration">8 seconds</div><div class="jenkins-sequential-track"><i></i></div><div class="jenkins-sequential-state">Waiting</div></div>
+<div class="jenkins-sequential-stage"><h3>Maven Build</h3><div class="jenkins-sequential-duration">18 seconds</div><div class="jenkins-sequential-track"><i></i></div><div class="jenkins-sequential-state">Waiting</div></div>
+<div class="jenkins-sequential-stage"><h3>Test Execution</h3><div class="jenkins-sequential-duration">2m 14s</div><div class="jenkins-sequential-track"><i></i></div><div class="jenkins-sequential-state">Waiting</div></div>
+<div class="jenkins-sequential-stage"><h3>Publish Reports</h3><div class="jenkins-sequential-duration">6 seconds</div><div class="jenkins-sequential-track"><i></i></div><div class="jenkins-sequential-state">Waiting</div></div>
+</div>
+<div class="jenkins-view-footer"><span id="frameworkFlowStatus">● Ready to start pipeline</span><span>GitLab → Jenkins → Maven → Tests → Reports</span></div>
 </div></div></section>
 <section id="education"><div class="container bottom"><div><div class="kicker">Academic background</div><h2 class="section-title">Education</h2><div class="panel education"><div class="edu-icon">▰</div><div><strong>B.E (IPE)</strong><div class="muted">2017 – 2020</div></div></div></div>
 <div id="contact"><div class="kicker">Let's connect</div><h2 class="section-title">Get In Touch</h2><div class="panel contact"><a href="mailto:patilchetan256@gmail.com">✉ patilchetan256@gmail.com</a><a href="tel:+918217480083">☎ +91 82174 80083</a><a href="https://www.linkedin.com/in/chetan-patil-8bb225145" target="_blank" rel="noopener">in LinkedIn Profile</a><a href="https://github.com/chetan13025" target="_blank" rel="noopener">◉ github.com/chetan13025</a></div></div></div></section>
@@ -659,21 +676,22 @@ window.addEventListener('hashchange',()=>{
  const flow=document.getElementById('frameworkFlow');
  if(!flow)return;
  const status=document.getElementById('frameworkFlowStatus');
- const latest=flow.querySelector('.jenkins-build');
- const cells=latest?[...latest.querySelectorAll('.jenkins-cell')]:[];
- const bars=[...flow.querySelectorAll('.jenkins-average .jenkins-timebar i')];
+ const stages=[...flow.querySelectorAll('.jenkins-sequential-stage')];
  const labels=['Checkout','Maven Build','Test Execution','Publish Reports'];
  const durations=[600,800,1400,600];
  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  let timer=null,raf=0,active=false;
- const clear=()=>{
+ const stop=()=>{
    active=false;
    if(timer)clearTimeout(timer);
    if(raf)cancelAnimationFrame(raf);
    timer=raf=0;
    flow.classList.remove('is-running');
-   cells.forEach(c=>c.classList.remove('current'));
-   bars.forEach(b=>b.style.transform='scaleX(1)');
+   stages.forEach(stage=>{
+     stage.classList.remove('active','done');
+     stage.querySelector('.jenkins-sequential-track i').style.transform='scaleX(0)';
+     stage.querySelector('.jenkins-sequential-state').textContent='Waiting';
+   });
  };
  const run=()=>{
    if(active||reduced)return;
@@ -682,38 +700,34 @@ window.addEventListener('hashchange',()=>{
    let index=0;
    const next=()=>{
      if(!active)return;
-     if(index>=labels.length){
-       if(status)status.textContent='✓ Preview pipeline completed';
-       timer=setTimeout(()=>{index=0;next();},650);
+     if(index>=stages.length){
+       if(status)status.textContent='✓ Pipeline completed · All stages successful';
+       timer=setTimeout(()=>{index=0;stages.forEach(stage=>{stage.classList.remove('done');stage.querySelector('.jenkins-sequential-track i').style.transform='scaleX(0)';stage.querySelector('.jenkins-sequential-state').textContent='Waiting';});next();},700);
        return;
      }
-     const cell=cells[index],bar=bars[index],duration=durations[index],begin=performance.now();
-     cells.forEach(c=>c.classList.remove('current'));
-     if(cell)cell.classList.add('current');
-     if(bar)bar.style.transform='scaleX(0)';
-     if(status)status.textContent='● Preview: '+labels[index]+' stage running';
+     const stage=stages[index],bar=stage.querySelector('.jenkins-sequential-track i'),state=stage.querySelector('.jenkins-sequential-state'),begin=performance.now();
+     stage.classList.add('active');
+     if(status)status.textContent='● '+labels[index]+' stage running';
+     state.textContent='Running · 0%';
      const frame=now=>{
        if(!active)return;
-       const progress=Math.min(1,(now-begin)/duration);
-       if(bar)bar.style.transform='scaleX('+progress+')';
+       const progress=Math.min(1,(now-begin)/durations[index]);
+       bar.style.transform='scaleX('+progress+')';
+       state.textContent='Running · '+Math.round(progress*100)+'%';
        if(progress<1){raf=requestAnimationFrame(frame);return;}
-       if(cell)cell.classList.remove('current');
+       stage.classList.remove('active');
+       stage.classList.add('done');
+       state.textContent='✓ Completed';
        index++;
-       timer=setTimeout(next,80);
+       timer=setTimeout(next,90);
      };
      raf=requestAnimationFrame(frame);
    };
    next();
  };
- const stop=()=>{
-   clear();
-   if(status)status.textContent='● Animation paused · illustrative stage view';
- };
- if(reduced){bars.forEach(b=>b.style.transform='scaleX(1)');if(status)status.textContent='● Jenkins-style stage view';return;}
- if('IntersectionObserver' in window){
-   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>entry.isIntersecting?run():stop()),{threshold:.25});
-   observer.observe(flow);
- }else run();
+ const observer='IntersectionObserver' in window?new IntersectionObserver(entries=>entries.forEach(entry=>entry.isIntersecting?run():stop()),{threshold:.25}):null;
+ if(reduced){stages.forEach(stage=>{stage.classList.add('done');stage.querySelector('.jenkins-sequential-track i').style.transform='scaleX(1)';stage.querySelector('.jenkins-sequential-state').textContent='Completed';});if(status)status.textContent='● Jenkins pipeline stages';return;}
+ if(observer)observer.observe(flow);else run();
 })();
 </script>
 
