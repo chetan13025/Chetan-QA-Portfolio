@@ -551,12 +551,29 @@ html{scroll-padding-top:112px}
 @media(max-width:700px){#framework .framework-flow.jenkins-stage-view{padding:13px 9px}#framework .jenkins-table{min-width:570px}#framework .jenkins-view-head strong{font-size:.85rem}}
 @media(prefers-reduced-motion:reduce){#framework .jenkins-cell.current{animation:none}}
 
+
+/* Framework architecture section */
+.architecture-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.architecture-card{padding:19px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,rgba(29,48,71,.92),rgba(18,34,54,.97));min-width:0}
+.architecture-card h3{margin:0 0 9px;color:var(--cyan);font-size:1rem}
+.architecture-card p{margin:0 0 10px;color:var(--soft);font-size:.87rem}
+.architecture-card ul{margin:0;padding-left:18px;color:var(--muted);font-size:.83rem}
+.architecture-card li{margin:5px 0}
+.architecture-card.wide{grid-column:span 3}
+.architecture-flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:18px}
+.architecture-flow span{padding:8px 11px;border:1px solid var(--line-strong);border-radius:10px;background:rgba(56,189,248,.08);font-size:.8rem;font-weight:750;color:#e5f6ff}
+.architecture-flow b{color:var(--cyan)}
+.architecture-note{margin:14px 0 0;color:var(--muted);font-size:.8rem}
+.architecture-tree{margin:12px 0 0;padding:15px 17px;overflow-x:auto;border:1px solid var(--line);border-radius:13px;background:rgba(7,17,31,.72);color:#dcecff;font: .8rem/1.75 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre}
+@media(max-width:900px){.architecture-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.architecture-card.wide{grid-column:span 2}}
+@media(max-width:600px){.architecture-grid{grid-template-columns:1fr}.architecture-card.wide{grid-column:auto}.architecture-card{padding:16px}.architecture-flow{gap:6px}.architecture-flow span{font-size:.74rem}}
+
 </style>
 </head>
 <body>
 <header><div class="container nav">
 <a class="brand" href="#home"><span class="mark">&lt;/&gt;</span>Chetan Patil</a>
-<nav class="nav-links" id="navLinks" aria-label="Main navigation"><a href="#home" class="active">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#framework">Framework</a><a href="#education">Education</a><a href="#contact">Contact</a></nav>
+<nav class="nav-links" id="navLinks" aria-label="Main navigation"><a href="#home" class="active">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#architecture">Architecture</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#framework">Framework</a><a href="#education">Education</a><a href="#contact">Contact</a></nav>
 <a class="btn outline" href="assets/Chetan_Patil_Resume.pdf" download>↓ Resume</a><button class="menu" id="menuToggle" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
 </div></header>
 <main>
@@ -598,6 +615,40 @@ html{scroll-padding-top:112px}
 </div></div>
 <div class="skill-group"><h3>Testing Practices</h3><div class="skill-tags"><span>Functional & Regression Testing</span><span>Smoke & Sanity Testing</span><span>Integration Testing</span><span>Exploratory Testing</span><span>Database Validation</span><span>Agile / Scrum</span></div></div>
 </div></div></section>
+
+<section id="architecture"><div class="container">
+<div class="section-head"><div class="kicker">How the automation framework is organised</div><h2 class="section-title">Automation Framework Architecture</h2>
+<p class="muted" style="font-size:1rem;margin:12px 0 0">A layered view of how UI, mobile and API tests can share reusable components, test data, configuration and reporting.</p></div>
+<div class="architecture-grid">
+<article class="architecture-card"><h3>01 · Test Execution</h3><p>Entry points that organise and run automated checks.</p><ul><li>TestNG / Playwright Test</li><li>Cucumber BDD scenarios</li><li>Smoke, regression and end-to-end suites</li></ul></article>
+<article class="architecture-card"><h3>02 · UI & Mobile Automation</h3><p>Reusable screen and page interactions.</p><ul><li>Page Object Model: pages, locators and actions</li><li>Appium screen objects and gestures</li><li>Playwright page fixtures and components</li></ul></article>
+<article class="architecture-card"><h3>03 · API Clients</h3><p>Reusable API operations and response checks.</p><ul><li>REST Assured / Playwright API clients</li><li>Authentication and request builders</li><li>Response and schema assertions</li></ul></article>
+<article class="architecture-card"><h3>04 · Shared Utilities</h3><p>Common helpers used across test layers.</p><ul><li>Waits, logging and screenshots</li><li>Reusable assertions and file helpers</li><li>Database and test-support utilities</li></ul></article>
+<article class="architecture-card"><h3>05 · Test Data & Configuration</h3><p>Keep test inputs and environment settings separate.</p><ul><li>CSV, Excel and JSON test data</li><li>Environment properties and browser settings</li><li>Credentials supplied securely at runtime</li></ul></article>
+<article class="architecture-card"><h3>06 · Reporting & Evidence</h3><p>Make execution outcomes easy to investigate.</p><ul><li>Allure and Extent HTML reports</li><li>Screenshots, logs and failure evidence</li><li>Pass/fail summaries for regression runs</li></ul></article>
+<article class="architecture-card wide"><h3>07 · CI/CD Integration</h3><p>Illustrative delivery flow using the tools represented in the portfolio. Pipeline execution depends on project-specific Jenkins configuration.</p>
+<div class="architecture-flow"><span>Git push / PR</span><b>→</b><span>Jenkins</span><b>→</b><span>Maven / Playwright</span><b>→</b><span>UI · Mobile · API suites</span><b>→</b><span>Reports & artifacts</span></div></article>
+</div>
+<div class="panel" style="margin-top:17px"><h3 style="margin:0;color:var(--cyan);font-size:1rem">Example project structure</h3><p class="muted" style="margin:6px 0 0;font-size:.85rem">A representative organisation for a Java-based automation project; individual repositories may use different layouts.</p>
+<pre class="architecture-tree">src/
+├── main/java/
+│   ├── pages/          # Page Object Model classes
+│   ├── api/            # API clients and request builders
+│   ├── utilities/      # Waits, logs, screenshots, helpers
+│   └── config/         # Environment and framework config
+├── test/java/
+│   ├── tests/          # TestNG test classes
+│   ├── runners/        # Cucumber runners
+│   └── data/           # Test data readers
+└── test/resources/
+    ├── features/       # BDD feature files
+    ├── testdata/       # CSV, Excel and JSON
+    └── config/         # Properties files
+reports/                # Allure / Extent output
+Jenkinsfile              # CI pipeline definition</pre>
+<p class="architecture-note">Architecture overview is illustrative and describes framework practices and tools; it does not claim that every layer is implemented in one integrated repository.</p></div>
+</div></section>
+
 <section id="experience"><div class="container"><div class="section-head"><div class="kicker">Career journey</div><h2 class="section-title">Work Experience</h2></div><div class="panel timeline">
 <article class="job"><h3>QA Engineer <span class="muted">| Digital Harbor | Bengaluru, India</span></h3><div class="meta">07/2025 – Present · <span class="current">Current</span></div>
 <div class="subhead">Yoodle – Enterprise Collaboration Platform</div><ul class="compact"><li>Plan and execute end-to-end validation of web, desktop and mobile collaboration workflows, including UI, API and backend behaviour.</li><li>Perform functional, regression, integration, smoke and exploratory testing across messaging and collaboration modules.</li><li>Work with developers and product owners during Agile sprints to reproduce issues, track defects and support release sign-off.</li></ul>
