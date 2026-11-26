@@ -539,6 +539,14 @@ html{scroll-padding-top:112px}
 #framework .passed-dot{background:#58b98b}#framework .failed-dot{background:#d95d66}#framework .running-dot{background:#5dbaf1}#framework .skipped-dot{background:#52677d}
 #framework .jenkins-view-footer{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:13px;padding-top:11px;border-top:1px solid #29455e;font-size:.65rem;color:#c5d9e9}
 #framework .jenkins-view-footer span:first-child{color:#78dcff;font-weight:700}
+#framework .jenkins-progress{height:5px;margin:8px 9px 0;background:#40566d;border-radius:6px;overflow:hidden}
+#framework .jenkins-progress i{display:block;width:100%;height:100%;background:#5dbaf1;transform:scaleX(0);transform-origin:left}
+#framework .jenkins-cell.current .jenkins-progress i{animation:jenkinsTestProgress 2.3s ease-out forwards}
+#framework .jenkins-cell.finished-running{background:#183c32;border:1px solid #397d61;color:#d8f8e7;outline:0;box-shadow:none;animation:none}
+#framework .jenkins-cell.finished-running small{color:#b5dcca}
+#framework .jenkins-cell.report-running{outline:2px solid #58d9ff;outline-offset:-2px;box-shadow:0 0 15px #25caff38}
+@keyframes jenkinsTestProgress{to{transform:scaleX(1)}}
+@media(max-width:700px){#framework .jenkins-table{min-width:610px}}
 @keyframes jenkinsCurrent{from{box-shadow:0 0 0 1px #58d9ff20,0 0 8px #25caff20}to{box-shadow:0 0 0 2px #58d9ff65,0 0 22px #25caff55}}
 @media(max-width:700px){#framework .framework-flow.jenkins-stage-view{padding:13px 9px}#framework .jenkins-table{min-width:570px}#framework .jenkins-view-head strong{font-size:.85rem}}
 @media(prefers-reduced-motion:reduce){#framework .jenkins-cell.current{animation:none}}
@@ -607,15 +615,26 @@ html{scroll-padding-top:112px}
 <article class="project"><div class="project-heading"><div class="project-icon">▯</div><h3>FTA – Field Team Automation</h3></div><p>Automated mobile scenarios for tour-plan creation and implemented parallel execution across Android devices.</p><div class="project-detail"><strong>Contribution:</strong> 100+ Appium mobile scenarios, reducing test execution time by 60%.</div><div class="tags"><span class="tag">Appium</span><span class="tag">Android</span><span class="tag">TestNG</span></div></article>
 </div></div></section>
 </div></div></section>
-<section id="framework"><div class="container"><div class="section-head"><div class="kicker">CI/CD workflow</div><h2 class="section-title">Jenkins pipeline stage view.</h2><p class="muted" style="font-size:1.05rem;margin:12px 0 0">A Jenkins-style view of a QA automation pipeline, with GitLab as the source repository and Jenkins orchestrating build, test and reporting stages.</p></div><div class="framework-copy"><h3>Build visibility. Test feedback.</h3><p>A GitLab push or merge request can trigger Jenkins to check out the latest code, run the Maven build, execute configured UI, mobile and API automation suites, and publish test reports.</p><p>The stage view below is an illustrative design, not a live Jenkins connection. Build identifiers, durations and outcomes are sample values.</p></div><div class="framework-flow jenkins-stage-view jenkins-sequential" id="frameworkFlow" aria-label="Animated Jenkins QA pipeline stages">
+<section id="framework"><div class="container"><div class="section-head"><div class="kicker">CI/CD workflow</div><h2 class="section-title">Jenkins pipeline stage view.</h2><p class="muted" style="font-size:1.05rem;margin:12px 0 0">A Jenkins-style view of a QA automation pipeline, with GitLab as the source repository and Jenkins orchestrating build, test and reporting stages.</p></div><div class="framework-copy"><h3>Build visibility. Test feedback.</h3><p>A GitLab push or merge request can trigger Jenkins to check out the latest code, run the Maven build, execute configured UI, mobile and API automation suites, and publish test reports.</p><p>The stage view below is an illustrative design, not a live Jenkins connection. Build identifiers, durations and outcomes are sample values.</p></div><div class="framework-flow jenkins-stage-view" id="frameworkFlow" aria-label="Illustrative Jenkins build history and pipeline stages">
 <div class="jenkins-view-head"><strong>Jenkins · QA Automation Pipeline</strong><span>GITLAB INTEGRATION</span></div>
-<div class="jenkins-sequential-grid">
-<div class="jenkins-sequential-stage"><h3>Checkout</h3><div class="jenkins-sequential-duration">8 seconds</div><div class="jenkins-sequential-track"><i></i></div><div class="jenkins-sequential-state">Waiting</div></div>
-<div class="jenkins-sequential-stage"><h3>Maven Build</h3><div class="jenkins-sequential-duration">18 seconds</div><div class="jenkins-sequential-track"><i></i></div><div class="jenkins-sequential-state">Waiting</div></div>
-<div class="jenkins-sequential-stage"><h3>Test Execution</h3><div class="jenkins-sequential-duration">2m 14s</div><div class="jenkins-sequential-track"><i></i></div><div class="jenkins-sequential-state">Waiting</div></div>
-<div class="jenkins-sequential-stage"><h3>Publish Reports</h3><div class="jenkins-sequential-duration">6 seconds</div><div class="jenkins-sequential-track"><i></i></div><div class="jenkins-sequential-state">Waiting</div></div>
-</div>
-<div class="jenkins-view-footer"><span id="frameworkFlowStatus">● Ready to start pipeline</span><span>GitLab → Jenkins → Maven → Tests → Reports</span></div>
+<div class="jenkins-table-wrap">
+<table class="jenkins-table" aria-label="Sample Jenkins build stage history">
+<thead><tr><th>Build History</th><th>Checkout</th><th>Maven Build</th><th>Test Execution</th><th>Publish Reports</th></tr></thead>
+<tbody>
+<tr class="jenkins-average"><td>Average stage time</td><td>8 sec<div class="jenkins-timebar"><i style="width:34%"></i></div></td><td>18 sec<div class="jenkins-timebar"><i style="width:58%"></i></div></td><td>2 min 14 sec<div class="jenkins-timebar"><i style="width:100%"></i></div></td><td>6 sec<div class="jenkins-timebar"><i style="width:27%"></i></div></td></tr>
+<tr class="jenkins-build"><td><span class="jenkins-build-id">#248</span><span class="jenkins-date">Yoodle · Latest</span></td>
+<td class="jenkins-cell success"><strong>✓</strong><small>Passed · 8 sec</small></td>
+<td class="jenkins-cell success"><strong>✓</strong><small>Passed · 18 sec</small></td>
+<td class="jenkins-cell current" id="jenkinsTestCell"><strong>● Running</strong><small>Test suite in progress</small><div class="jenkins-progress"><i></i></div></td>
+<td class="jenkins-cell skipped" id="jenkinsReportCell"><strong>◷ Waiting</strong><small>Pending test result</small></td></tr>
+<tr class="jenkins-build"><td><span class="jenkins-build-id failed-id">#247</span><span class="jenkins-date">SET Project</span></td>
+<td class="jenkins-cell success"><strong>✓</strong><small>Passed</small></td>
+<td class="jenkins-cell success"><strong>✓</strong><small>Passed</small></td>
+<td class="jenkins-cell failed"><strong>✕</strong><small>Failed · 3 tests</small></td>
+<td class="jenkins-cell skipped"><strong>—</strong><small>Skipped</small></td></tr>
+</tbody></table></div>
+<div class="jenkins-legend"><span><i class="passed-dot"></i>Success</span><span><i class="running-dot"></i>Running</span><span><i class="failed-dot"></i>Failed</span><span><i class="skipped-dot"></i>Skipped</span></div>
+<div class="jenkins-view-footer"><span id="frameworkFlowStatus">● Build #248 · Test Execution running</span><span>GitLab → Jenkins → Maven → Tests → Reports</span></div>
 </div></div></section>
 <section id="education"><div class="container bottom"><div><div class="kicker">Academic background</div><h2 class="section-title">Education</h2><div class="panel education"><div class="edu-icon">▰</div><div><strong>B.E (IPE)</strong><div class="muted">2017 – 2020</div></div></div></div>
 <div id="contact"><div class="kicker">Let's connect</div><h2 class="section-title">Get In Touch</h2><div class="panel contact"><a href="mailto:patilchetan256@gmail.com">✉ patilchetan256@gmail.com</a><a href="tel:+918217480083">☎ +91 82174 80083</a><a href="https://www.linkedin.com/in/chetan-patil-8bb225145" target="_blank" rel="noopener">in LinkedIn Profile</a><a href="https://github.com/chetan13025" target="_blank" rel="noopener">◉ github.com/chetan13025</a></div></div></div></section>
@@ -675,59 +694,40 @@ window.addEventListener('hashchange',()=>{
 (()=>{
  const flow=document.getElementById('frameworkFlow');
  if(!flow)return;
+ const testCell=document.getElementById('jenkinsTestCell');
+ const reportCell=document.getElementById('jenkinsReportCell');
  const status=document.getElementById('frameworkFlowStatus');
- const stages=[...flow.querySelectorAll('.jenkins-sequential-stage')];
- const labels=['Checkout','Maven Build','Test Execution','Publish Reports'];
- const durations=[600,800,1400,600];
+ if(!testCell||!reportCell)return;
  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- let timer=null,raf=0,active=false;
- const stop=()=>{
-   active=false;
-   if(timer)clearTimeout(timer);
-   if(raf)cancelAnimationFrame(raf);
-   timer=raf=0;
-   flow.classList.remove('is-running');
-   stages.forEach(stage=>{
-     stage.classList.remove('active','done');
-     stage.querySelector('.jenkins-sequential-track i').style.transform='scaleX(0)';
-     stage.querySelector('.jenkins-sequential-state').textContent='Waiting';
-   });
+ let started=false,timer=null;
+ const finish=()=>{
+   testCell.classList.remove('current');
+   testCell.classList.add('finished-running');
+   testCell.innerHTML='<strong>✓ Passed</strong><small>All tests passed · 2m 14s</small>';
+   reportCell.classList.remove('skipped');
+   reportCell.classList.add('report-running');
+   reportCell.innerHTML='<strong>● Publishing</strong><small>Generating test reports</small>';
+   if(status)status.textContent='● Build #248 · Publishing reports';
+   timer=setTimeout(()=>{
+     reportCell.classList.remove('report-running');
+     reportCell.classList.add('success');
+     reportCell.innerHTML='<strong>✓ Published</strong><small>Allure · Extent Reports</small>';
+     if(status)status.textContent='✓ Build #248 completed · All stages successful';
+   },850);
  };
- const run=()=>{
-   if(active||reduced)return;
-   active=true;
-   flow.classList.add('is-running');
-   let index=0;
-   const next=()=>{
-     if(!active)return;
-     if(index>=stages.length){
-       if(status)status.textContent='✓ Pipeline completed · All stages successful';
-       timer=setTimeout(()=>{index=0;stages.forEach(stage=>{stage.classList.remove('done');stage.querySelector('.jenkins-sequential-track i').style.transform='scaleX(0)';stage.querySelector('.jenkins-sequential-state').textContent='Waiting';});next();},700);
-       return;
-     }
-     const stage=stages[index],bar=stage.querySelector('.jenkins-sequential-track i'),state=stage.querySelector('.jenkins-sequential-state'),begin=performance.now();
-     stage.classList.add('active');
-     if(status)status.textContent='● '+labels[index]+' stage running';
-     state.textContent='Running · 0%';
-     const frame=now=>{
-       if(!active)return;
-       const progress=Math.min(1,(now-begin)/durations[index]);
-       bar.style.transform='scaleX('+progress+')';
-       state.textContent='Running · '+Math.round(progress*100)+'%';
-       if(progress<1){raf=requestAnimationFrame(frame);return;}
-       stage.classList.remove('active');
-       stage.classList.add('done');
-       state.textContent='✓ Completed';
-       index++;
-       timer=setTimeout(next,90);
-     };
-     raf=requestAnimationFrame(frame);
-   };
-   next();
+ const start=()=>{
+   if(started)return;
+   started=true;
+   if(reduced){finish();return;}
+   if(status)status.textContent='● Build #248 · Test Execution running';
+   timer=setTimeout(finish,2300);
  };
- const observer='IntersectionObserver' in window?new IntersectionObserver(entries=>entries.forEach(entry=>entry.isIntersecting?run():stop()),{threshold:.25}):null;
- if(reduced){stages.forEach(stage=>{stage.classList.add('done');stage.querySelector('.jenkins-sequential-track i').style.transform='scaleX(1)';stage.querySelector('.jenkins-sequential-state').textContent='Completed';});if(status)status.textContent='● Jenkins pipeline stages';return;}
- if(observer)observer.observe(flow);else run();
+ if('IntersectionObserver'in window){
+   const observer=new IntersectionObserver(entries=>{
+     if(entries.some(entry=>entry.isIntersecting)){start();observer.disconnect();}
+   },{threshold:.25});
+   observer.observe(flow);
+ }else start();
 })();
 </script>
 
