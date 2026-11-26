@@ -496,6 +496,14 @@ html{scroll-padding-top:112px}
 #framework .jenkins-average td:first-child{text-align:right;padding-right:8px;line-height:1.4}
 #framework .jenkins-timebar{height:4px;background:#3d5268;margin:7px 4px 0;border-radius:5px;overflow:hidden}
 #framework .jenkins-timebar i{height:100%;display:block;background:#62b6ef}
+#framework .jenkins-timebar i{transform:scaleX(0);transform-origin:left}
+#framework .jenkins-stage-view.is-running .jenkins-timebar i{animation:jenkinsBarFill 1.35s ease-out infinite}
+#framework .jenkins-stage-view.is-running .jenkins-average td:nth-child(3) i{animation-delay:.12s}
+#framework .jenkins-stage-view.is-running .jenkins-average td:nth-child(4) i{animation-delay:.24s}
+#framework .jenkins-stage-view.is-running .jenkins-average td:nth-child(5) i{animation-delay:.36s}
+@keyframes jenkinsBarFill{0%{transform:scaleX(0)}78%,100%{transform:scaleX(1)}}
+@media(prefers-reduced-motion:reduce){#framework .jenkins-timebar i{transform:scaleX(1)!important;animation:none!important}}
+
 #framework .jenkins-build td:first-child{background:#1c3045;padding:8px 5px;text-align:center;border:1px solid #344d64;border-radius:5px}
 #framework .jenkins-build-id{display:inline-block;background:#3977a9;color:#fff;border-radius:12px;padding:3px 7px;font-size:.62rem;font-weight:700}
 #framework .jenkins-build-id.failed-id{background:#bd5555}
