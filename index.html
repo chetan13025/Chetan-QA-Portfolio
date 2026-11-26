@@ -594,8 +594,8 @@ html{scroll-padding-top:112px}
 <div class="jenkins-view-head"><strong>Jenkins · QA Automation Pipeline</strong><span>GITLAB INTEGRATION</span></div>
 <div class="jenkins-table-wrap"><table class="jenkins-table"><thead><tr><th>Build history</th><th>Checkout</th><th>Maven Build</th><th>Test Execution</th><th>Publish Reports</th></tr></thead><tbody>
 <tr class="jenkins-average"><td>Average stage times</td><td>8s<div class="jenkins-timebar"><i style="width:25%"></i></div></td><td>18s<div class="jenkins-timebar"><i style="width:48%"></i></div></td><td>2m 14s<div class="jenkins-timebar"><i style="width:90%"></i></div></td><td>6s<div class="jenkins-timebar"><i style="width:20%"></i></div></td></tr>
-<tr class="jenkins-build"><td><span class="jenkins-build-id">Example #2</span><span class="jenkins-date">Sample run</span></td><td class="jenkins-cell success"><strong>8s</strong><small>Success</small></td><td class="jenkins-cell success"><strong>18s</strong><small>Success</small></td><td class="jenkins-cell success"><strong>2m 14s</strong><small>Passed</small></td><td class="jenkins-cell success"><strong>6s</strong><small>Published</small></td></tr>
-<tr class="jenkins-build"><td><span class="jenkins-build-id failed-id">Example #1</span><span class="jenkins-date">Sample run</span></td><td class="jenkins-cell success"><strong>7s</strong><small>Success</small></td><td class="jenkins-cell success"><strong>17s</strong><small>Success</small></td><td class="jenkins-cell failed"><strong>36s</strong><small>Failed</small></td><td class="jenkins-cell skipped"><strong>—</strong><small>Skipped</small></td></tr>
+<tr class="jenkins-build"><td><span class="jenkins-build-id">Build 2</span><span class="jenkins-date">Yoodle</span></td><td class="jenkins-cell success"><strong>8s</strong><small>Success</small></td><td class="jenkins-cell success"><strong>18s</strong><small>Success</small></td><td class="jenkins-cell success"><strong>2m 14s</strong><small>Passed</small></td><td class="jenkins-cell success"><strong>6s</strong><small>Published</small></td></tr>
+<tr class="jenkins-build"><td><span class="jenkins-build-id failed-id">Build 1</span><span class="jenkins-date">SET Project</span></td><td class="jenkins-cell success"><strong>7s</strong><small>Success</small></td><td class="jenkins-cell success"><strong>17s</strong><small>Success</small></td><td class="jenkins-cell failed"><strong>36s</strong><small>Failed</small></td><td class="jenkins-cell skipped"><strong>—</strong><small>Skipped</small></td></tr>
 </tbody></table></div>
 <div class="jenkins-legend"><span><i class="passed-dot"></i>Passed</span><span><i class="failed-dot"></i>Failed</span><span><i class="running-dot"></i>Running</span><span><i class="skipped-dot"></i>Skipped</span></div>
 <div class="jenkins-view-footer"><span id="frameworkFlowStatus">● Ready · illustrative stage view</span><span>GitLab → Jenkins → Maven → Tests → Reports</span></div>
@@ -659,33 +659,61 @@ window.addEventListener('hashchange',()=>{
  const flow=document.getElementById('frameworkFlow');
  if(!flow)return;
  const status=document.getElementById('frameworkFlowStatus');
- const rows=[...flow.querySelectorAll('.jenkins-build')];
+ const latest=flow.querySelector('.jenkins-build');
+ const cells=latest?[...latest.querySelectorAll('.jenkins-cell')]:[];
+ const bars=[...flow.querySelectorAll('.jenkins-average .jenkins-timebar i')];
+ const labels=['Checkout','Maven Build','Test Execution','Publish Reports'];
+ const durations=[600,800,1400,600];
  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- let timer=null,step=0;
- const stages=['Checkout','Maven Build','Test Execution','Publish Reports'];
- const stop=()=>{
-   if(timer!==null){window.clearInterval(timer);timer=null;}
+ let timer=null,raf=0,active=false;
+ const clear=()=>{
+   active=false;
+   if(timer)clearTimeout(timer);
+   if(raf)cancelAnimationFrame(raf);
+   timer=raf=0;
    flow.classList.remove('is-running');
-   flow.querySelectorAll('.jenkins-cell').forEach(cell=>cell.classList.remove('current'));
+   cells.forEach(c=>c.classList.remove('current'));
+   bars.forEach(b=>b.style.transform='scaleX(1)');
+ };
+ const run=()=>{
+   if(active||reduced)return;
+   active=true;
+   flow.classList.add('is-running');
+   let index=0;
+   const next=()=>{
+     if(!active)return;
+     if(index>=labels.length){
+       if(status)status.textContent='✓ Preview pipeline completed';
+       timer=setTimeout(()=>{index=0;next();},650);
+       return;
+     }
+     const cell=cells[index],bar=bars[index],duration=durations[index],begin=performance.now();
+     cells.forEach(c=>c.classList.remove('current'));
+     if(cell)cell.classList.add('current');
+     if(bar)bar.style.transform='scaleX(0)';
+     if(status)status.textContent='● Preview: '+labels[index]+' stage running';
+     const frame=now=>{
+       if(!active)return;
+       const progress=Math.min(1,(now-begin)/duration);
+       if(bar)bar.style.transform='scaleX('+progress+')';
+       if(progress<1){raf=requestAnimationFrame(frame);return;}
+       if(cell)cell.classList.remove('current');
+       index++;
+       timer=setTimeout(next,80);
+     };
+     raf=requestAnimationFrame(frame);
+   };
+   next();
+ };
+ const stop=()=>{
+   clear();
    if(status)status.textContent='● Animation paused · illustrative stage view';
  };
- const start=()=>{
-   if(reduced||timer!==null)return;
-   flow.classList.add('is-running');
-   const cells=rows[0].querySelectorAll('.jenkins-cell');
-   const advance=()=>{
-     cells.forEach((cell,i)=>cell.classList.toggle('current',i===step));
-     if(status)status.textContent='● Preview: '+stages[step]+' stage running';
-     step=(step+1)%cells.length;
-   };
-   advance();
-   timer=window.setInterval(advance,1150);
- };
- if(reduced){if(status)status.textContent='● Jenkins-style stage view';return;}
+ if(reduced){bars.forEach(b=>b.style.transform='scaleX(1)');if(status)status.textContent='● Jenkins-style stage view';return;}
  if('IntersectionObserver' in window){
-   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>entry.isIntersecting?start():stop()),{threshold:.25});
+   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>entry.isIntersecting?run():stop()),{threshold:.25});
    observer.observe(flow);
- }else start();
+ }else run();
 })();
 </script>
 
