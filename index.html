@@ -435,6 +435,10 @@ html{scroll-padding-top:112px}
  #framework .framework-node{transition:none}
 }
 
+
+/* Animation runs only while the framework section is in view */
+#framework .framework-flow-footer,#framework .framework-flow-status,#framework .framework-replay{display:none!important}
+
 </style>
 </head>
 <body>
@@ -509,7 +513,7 @@ html{scroll-padding-top:112px}
 <div class="framework-node"><span class="framework-node-icon" aria-hidden="true">⌘</span><span class="framework-node-copy"><strong>Automation Engines</strong><small>Selenium · Appium · REST Assured</small></span></div>
 <div class="framework-wire" aria-hidden="true"></div>
 <div class="framework-node"><span class="framework-node-icon" aria-hidden="true">▤</span><span class="framework-node-copy"><strong>Build &amp; Reporting</strong><small>Maven · Jenkins · Allure / Extent Reports</small></span></div>
-<div class="framework-flow-footer"><span class="framework-flow-status" id="frameworkFlowStatus" aria-live="polite">Framework execution flow</span><button class="framework-replay" id="frameworkReplay" type="button">↻ Replay animation</button></div>
+
 </div></div></div></section>
 <section id="education"><div class="container bottom"><div><div class="kicker">Academic background</div><h2 class="section-title">Education</h2><div class="panel education"><div class="edu-icon">▰</div><div><strong>B.E (IPE)</strong><div class="muted">2017 – 2020</div></div></div></div>
 <div id="contact"><div class="kicker">Let's connect</div><h2 class="section-title">Get In Touch</h2><div class="panel contact"><a href="mailto:patilchetan256@gmail.com">✉ patilchetan256@gmail.com</a><a href="tel:+918217480083">☎ +91 82174 80083</a><a href="https://www.linkedin.com/in/chetan-patil-8bb225145" target="_blank" rel="noopener">in LinkedIn Profile</a><a href="https://github.com/chetan13025" target="_blank" rel="noopener">◉ github.com/chetan13025</a></div></div></div></section>
@@ -569,22 +573,18 @@ window.addEventListener('hashchange',()=>{
 (()=>{
  const flow=document.getElementById('frameworkFlow');
  if(!flow)return;
- const status=document.getElementById('frameworkFlowStatus');
- const replay=document.getElementById('frameworkReplay');
  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- const reveal=()=>{flow.classList.add('is-visible');if(status)status.textContent='Framework execution flow';};
+ if(reduced){flow.classList.remove('is-visible');return;}
  if('IntersectionObserver' in window){
    const observer=new IntersectionObserver(entries=>{
-     if(entries.some(entry=>entry.isIntersecting)){reveal();observer.disconnect();}
+     entries.forEach(entry=>{
+       flow.classList.toggle('is-visible',entry.isIntersecting);
+     });
    },{threshold:.25});
    observer.observe(flow);
- }else reveal();
- replay?.addEventListener('click',()=>{
-   flow.classList.remove('is-visible');
-   void flow.offsetWidth;
+ }else{
    flow.classList.add('is-visible');
-   if(status)status.textContent=reduced?'Framework execution flow':'Animation replayed';
- });
+ }
 })();
 </script>
 
