@@ -482,6 +482,42 @@ html{scroll-padding-top:112px}
  #framework .cicd-flow.is-running .cicd-progress span,#framework .cicd-connector.active:after{animation:none}
 }
 
+
+/* Jenkins Stage View-inspired QA pipeline dashboard */
+#framework .framework-flow.jenkins-stage-view{display:block;min-width:0;padding:18px;border:1px solid rgba(74,166,211,.3);border-radius:16px;background:linear-gradient(145deg,#0d1a2b,#12243a);box-shadow:0 18px 44px rgba(0,0,0,.18);overflow:hidden}
+#framework .jenkins-view-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+#framework .jenkins-view-head strong{font-size:.95rem;color:#f5f9ff}
+#framework .jenkins-view-head span{font-size:.62rem;color:#83d9ff;font-weight:800;letter-spacing:.9px}
+#framework .jenkins-table-wrap{width:100%;overflow-x:auto}
+#framework .jenkins-table{width:100%;min-width:610px;border-collapse:separate;border-spacing:3px;table-layout:fixed;font-size:.75rem}
+#framework .jenkins-table th{height:62px;background:#20344b;color:#f5f8fc;border:1px solid #3c536b;border-radius:5px;padding:8px 5px;line-height:1.35;font-size:.72rem}
+#framework .jenkins-table th:first-child{width:104px;background:#17283b}
+#framework .jenkins-average td{height:49px;background:#1a2b3e;color:#c9d9e8;text-align:center;font-size:.68rem;padding:5px}
+#framework .jenkins-average td:first-child{text-align:right;padding-right:8px;line-height:1.4}
+#framework .jenkins-timebar{height:4px;background:#3d5268;margin:7px 4px 0;border-radius:5px;overflow:hidden}
+#framework .jenkins-timebar i{height:100%;display:block;background:#62b6ef}
+#framework .jenkins-build td:first-child{background:#1c3045;padding:8px 5px;text-align:center;border:1px solid #344d64;border-radius:5px}
+#framework .jenkins-build-id{display:inline-block;background:#3977a9;color:#fff;border-radius:12px;padding:3px 7px;font-size:.62rem;font-weight:700}
+#framework .jenkins-build-id.failed-id{background:#bd5555}
+#framework .jenkins-date{display:block;color:#c8d8e7;font-size:.62rem;margin-top:7px}
+#framework .jenkins-cell{height:70px;text-align:center;vertical-align:middle;border-radius:6px;position:relative;transition:box-shadow .25s,border-color .25s}
+#framework .jenkins-cell strong{display:block;font-size:.9rem;font-weight:650}
+#framework .jenkins-cell small{display:block;font-size:.62rem;margin-top:4px}
+#framework .jenkins-cell.success{background:#183c32;border:1px solid #397d61;color:#d8f8e7}
+#framework .jenkins-cell.success small{color:#b5dcca}
+#framework .jenkins-cell.failed{background:repeating-linear-gradient(135deg,#4b3038,#4b3038 16px,#603940 16px,#603940 32px);border:1px solid #e56b70;color:#ffb3b3}
+#framework .jenkins-cell.failed small{color:#ffb3b3}
+#framework .jenkins-cell.skipped{background:#263447;border:1px solid #52677d;color:#d1dce7}
+#framework .jenkins-cell.current{outline:2px solid #58d9ff;outline-offset:-2px;box-shadow:0 0 0 2px #58d9ff38,0 0 20px #25caff38;animation:jenkinsCurrent 1.2s ease-in-out infinite alternate}
+#framework .jenkins-legend{display:flex;gap:15px;flex-wrap:wrap;margin-top:12px;font-size:.65rem;color:#c4d4e4}
+#framework .jenkins-legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px}
+#framework .passed-dot{background:#58b98b}#framework .failed-dot{background:#d95d66}#framework .running-dot{background:#5dbaf1}#framework .skipped-dot{background:#52677d}
+#framework .jenkins-view-footer{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:13px;padding-top:11px;border-top:1px solid #29455e;font-size:.65rem;color:#c5d9e9}
+#framework .jenkins-view-footer span:first-child{color:#78dcff;font-weight:700}
+@keyframes jenkinsCurrent{from{box-shadow:0 0 0 1px #58d9ff20,0 0 8px #25caff20}to{box-shadow:0 0 0 2px #58d9ff65,0 0 22px #25caff55}}
+@media(max-width:700px){#framework .framework-flow.jenkins-stage-view{padding:13px 9px}#framework .jenkins-table{min-width:570px}#framework .jenkins-view-head strong{font-size:.85rem}}
+@media(prefers-reduced-motion:reduce){#framework .jenkins-cell.current{animation:none}}
+
 </style>
 </head>
 <body>
@@ -546,17 +582,16 @@ html{scroll-padding-top:112px}
 <article class="project"><div class="project-heading"><div class="project-icon">▯</div><h3>FTA – Field Team Automation</h3></div><p>Automated mobile scenarios for tour-plan creation and implemented parallel execution across Android devices.</p><div class="project-detail"><strong>Contribution:</strong> 100+ Appium mobile scenarios, reducing test execution time by 60%.</div><div class="tags"><span class="tag">Appium</span><span class="tag">Android</span><span class="tag">TestNG</span></div></article>
 </div></div></section>
 </div></div></section>
-<section id="framework"><div class="container"><div class="section-head"><div class="kicker">CI/CD workflow</div><h2 class="section-title">From GitLab commit to test reports.</h2><p class="muted" style="font-size:1.05rem;margin:12px 0 0">A typical QA automation pipeline using GitLab for source control and Jenkins to orchestrate build, test execution and reporting.</p></div><div class="framework-grid"><div class="framework-copy"><h3>Automated builds. Continuous feedback.</h3><p>A code push or merge request in GitLab can trigger Jenkins, which checks out the latest changes and runs the Maven build and configured automation suites.</p><p>Test execution can cover UI, mobile and API checks using Selenium, Appium and REST Assured, with results published through Allure or Extent Reports. The flow below illustrates a typical pipeline and does not imply that every stage is configured identically in every project.</p></div><div class="framework-flow cicd-flow" id="frameworkFlow" aria-label="GitLab and Jenkins QA automation CI/CD pipeline">
-<div class="cicd-track">
-<div class="cicd-stage"><div class="cicd-card"><span class="cicd-icon" aria-hidden="true">⌘</span></div><strong>Code Commit</strong><small>GitLab · Push / Merge</small><span class="cicd-connector" aria-hidden="true"></span></div>
-<div class="cicd-stage"><div class="cicd-card"><span class="cicd-icon" aria-hidden="true">⚙</span></div><strong>Build</strong><small>Jenkins · Maven</small><span class="cicd-connector" aria-hidden="true"></span></div>
-<div class="cicd-stage"><div class="cicd-card"><span class="cicd-icon" aria-hidden="true">✓</span></div><strong>Test Execution</strong><small>TestNG · Cucumber</small><span class="cicd-connector" aria-hidden="true"></span></div>
-<div class="cicd-stage"><div class="cicd-card"><span class="cicd-icon" aria-hidden="true">▣</span></div><strong>Automation</strong><small>Selenium · Appium · REST Assured</small><span class="cicd-connector" aria-hidden="true"></span></div>
-<div class="cicd-stage"><div class="cicd-card"><span class="cicd-icon" aria-hidden="true">▤</span></div><strong>Reports</strong><small>Allure · Extent Reports</small></div>
-</div>
-<div class="cicd-progress" aria-hidden="true"><span></span></div>
-<div class="cicd-caption"><span id="frameworkFlowStatus">● Pipeline ready</span><span>GitLab → Jenkins → Maven → Tests → Reports</span></div>
-</div></div></div></section>
+<section id="framework"><div class="container"><div class="section-head"><div class="kicker">CI/CD workflow</div><h2 class="section-title">Jenkins pipeline stage view.</h2><p class="muted" style="font-size:1.05rem;margin:12px 0 0">A Jenkins-style view of a QA automation pipeline, with GitLab as the source repository and Jenkins orchestrating build, test and reporting stages.</p></div><div class="framework-copy"><h3>Build visibility. Test feedback.</h3><p>A GitLab push or merge request can trigger Jenkins to check out the latest code, run the Maven build, execute configured UI, mobile and API automation suites, and publish test reports.</p><p>The stage view below is an illustrative design, not a live Jenkins connection. Build identifiers, durations and outcomes are sample values.</p></div><div class="framework-flow jenkins-stage-view" id="frameworkFlow" aria-label="Illustrative Jenkins stage view for GitLab QA automation pipeline">
+<div class="jenkins-view-head"><strong>Jenkins · QA Automation Pipeline</strong><span>GITLAB INTEGRATION</span></div>
+<div class="jenkins-table-wrap"><table class="jenkins-table"><thead><tr><th>Build history</th><th>Checkout</th><th>Maven Build</th><th>Test Execution</th><th>Publish Reports</th></tr></thead><tbody>
+<tr class="jenkins-average"><td>Average stage times</td><td>8s<div class="jenkins-timebar"><i style="width:25%"></i></div></td><td>18s<div class="jenkins-timebar"><i style="width:48%"></i></div></td><td>2m 14s<div class="jenkins-timebar"><i style="width:90%"></i></div></td><td>6s<div class="jenkins-timebar"><i style="width:20%"></i></div></td></tr>
+<tr class="jenkins-build"><td><span class="jenkins-build-id">Example #2</span><span class="jenkins-date">Sample run</span></td><td class="jenkins-cell success"><strong>8s</strong><small>Success</small></td><td class="jenkins-cell success"><strong>18s</strong><small>Success</small></td><td class="jenkins-cell success"><strong>2m 14s</strong><small>Passed</small></td><td class="jenkins-cell success"><strong>6s</strong><small>Published</small></td></tr>
+<tr class="jenkins-build"><td><span class="jenkins-build-id failed-id">Example #1</span><span class="jenkins-date">Sample run</span></td><td class="jenkins-cell success"><strong>7s</strong><small>Success</small></td><td class="jenkins-cell success"><strong>17s</strong><small>Success</small></td><td class="jenkins-cell failed"><strong>36s</strong><small>Failed</small></td><td class="jenkins-cell skipped"><strong>—</strong><small>Skipped</small></td></tr>
+</tbody></table></div>
+<div class="jenkins-legend"><span><i class="passed-dot"></i>Passed</span><span><i class="failed-dot"></i>Failed</span><span><i class="running-dot"></i>Running</span><span><i class="skipped-dot"></i>Skipped</span></div>
+<div class="jenkins-view-footer"><span id="frameworkFlowStatus">● Ready · illustrative stage view</span><span>GitLab → Jenkins → Maven → Tests → Reports</span></div>
+</div></div></section>
 <section id="education"><div class="container bottom"><div><div class="kicker">Academic background</div><h2 class="section-title">Education</h2><div class="panel education"><div class="edu-icon">▰</div><div><strong>B.E (IPE)</strong><div class="muted">2017 – 2020</div></div></div></div>
 <div id="contact"><div class="kicker">Let's connect</div><h2 class="section-title">Get In Touch</h2><div class="panel contact"><a href="mailto:patilchetan256@gmail.com">✉ patilchetan256@gmail.com</a><a href="tel:+918217480083">☎ +91 82174 80083</a><a href="https://www.linkedin.com/in/chetan-patil-8bb225145" target="_blank" rel="noopener">in LinkedIn Profile</a><a href="https://github.com/chetan13025" target="_blank" rel="noopener">◉ github.com/chetan13025</a></div></div></div></section>
 </main>
@@ -615,37 +650,32 @@ window.addEventListener('hashchange',()=>{
 (()=>{
  const flow=document.getElementById('frameworkFlow');
  if(!flow)return;
- const stages=[...flow.querySelectorAll('.cicd-stage')];
- const connectors=[...flow.querySelectorAll('.cicd-connector')];
  const status=document.getElementById('frameworkFlowStatus');
+ const rows=[...flow.querySelectorAll('.jenkins-build')];
  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- let timer=null,index=0;
- const labels=['GitLab code commit','Jenkins + Maven build','TestNG / Cucumber execution','Selenium · Appium · REST Assured','Allure / Extent report publishing'];
+ let timer=null,step=0;
+ const stages=['Checkout','Maven Build','Test Execution','Publish Reports'];
  const stop=()=>{
    if(timer!==null){window.clearInterval(timer);timer=null;}
-   stages.forEach(stage=>stage.classList.remove('active'));
-   connectors.forEach(line=>line.classList.remove('active'));
    flow.classList.remove('is-running');
-   if(status)status.textContent='● Pipeline paused';
+   flow.querySelectorAll('.jenkins-cell').forEach(cell=>cell.classList.remove('current'));
+   if(status)status.textContent='● Animation paused · illustrative stage view';
  };
  const start=()=>{
    if(reduced||timer!==null)return;
-   index=0;
    flow.classList.add('is-running');
-   const step=()=>{
-     stages.forEach((stage,i)=>stage.classList.toggle('active',i===index));
-     connectors.forEach((line,i)=>line.classList.toggle('active',i===index));
-     if(status)status.textContent='● '+labels[index];
-     index=(index+1)%stages.length;
+   const cells=rows[0].querySelectorAll('.jenkins-cell');
+   const advance=()=>{
+     cells.forEach((cell,i)=>cell.classList.toggle('current',i===step));
+     if(status)status.textContent='● Preview: '+stages[step]+' stage running';
+     step=(step+1)%cells.length;
    };
-   step();
-   timer=window.setInterval(step,1000);
+   advance();
+   timer=window.setInterval(advance,1150);
  };
- if(reduced){if(status)status.textContent='● CI/CD pipeline';return;}
+ if(reduced){if(status)status.textContent='● Jenkins-style stage view';return;}
  if('IntersectionObserver' in window){
-   const observer=new IntersectionObserver(entries=>{
-     entries.forEach(entry=>entry.isIntersecting?start():stop());
-   },{threshold:.3});
+   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>entry.isIntersecting?start():stop()),{threshold:.25});
    observer.observe(flow);
  }else start();
 })();
