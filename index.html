@@ -568,6 +568,47 @@ html{scroll-padding-top:112px}
 @media(max-width:900px){.architecture-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.architecture-card.wide{grid-column:span 2}}
 @media(max-width:600px){.architecture-grid{grid-template-columns:1fr}.architecture-card.wide{grid-column:auto}.architecture-card{padding:16px}.architecture-flow{gap:6px}.architecture-flow span{font-size:.74rem}}
 
+
+/* Architecture section reveal and pipeline motion */
+#architecture.architecture-animated .architecture-card,
+#architecture.architecture-animated .panel,
+#architecture.architecture-animated .architecture-flow span,
+#architecture.architecture-animated .architecture-flow b{
+  opacity:0;transform:translateY(18px);
+}
+#architecture .architecture-card,
+#architecture .panel,
+#architecture .architecture-flow span,
+#architecture .architecture-flow b{
+  transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1),border-color .25s ease,box-shadow .25s ease;
+}
+#architecture .architecture-card.is-visible,
+#architecture .panel.is-visible,
+#architecture .architecture-flow .is-visible{
+  opacity:1;transform:translateY(0);
+}
+#architecture .architecture-card.is-visible:hover{
+  transform:translateY(-5px);
+  border-color:var(--cyan);
+  box-shadow:0 14px 34px rgba(56,189,248,.12);
+}
+#architecture .architecture-flow span.is-visible{
+  border-color:var(--cyan);
+  box-shadow:0 0 18px rgba(56,189,248,.16);
+}
+@media(prefers-reduced-motion:reduce){
+  #architecture.architecture-animated .architecture-card,
+  #architecture.architecture-animated .panel,
+  #architecture.architecture-animated .architecture-flow span,
+  #architecture.architecture-animated .architecture-flow b{
+    opacity:1;transform:none;
+  }
+  #architecture .architecture-card,#architecture .panel,
+  #architecture .architecture-flow span,#architecture .architecture-flow b{
+    transition:none;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -809,6 +850,35 @@ window.addEventListener('hashchange',()=>{
    },{threshold:.25});
    observer.observe(flow);
  }else run();
+})();
+</script>
+
+
+<script>
+(()=>{
+ const section=document.getElementById('architecture');
+ if(!section)return;
+ const cards=[...section.querySelectorAll('.architecture-card')];
+ const panel=section.querySelector('.panel');
+ const flow=[...section.querySelectorAll('.architecture-flow span, .architecture-flow b')];
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(reduced||!('IntersectionObserver'in window)){
+   [...cards,panel,...flow].filter(Boolean).forEach(el=>el.classList.add('is-visible'));
+   return;
+ }
+ section.classList.add('architecture-animated');
+ let played=false;
+ const reveal=()=>{
+   if(played)return;
+   played=true;
+   cards.forEach((el,i)=>setTimeout(()=>el.classList.add('is-visible'),i*130));
+   flow.forEach((el,i)=>setTimeout(()=>el.classList.add('is-visible'),850+i*180));
+   if(panel)setTimeout(()=>panel.classList.add('is-visible'),cards.length*130+250);
+ };
+ const observer=new IntersectionObserver(entries=>{
+   if(entries.some(entry=>entry.isIntersecting)){reveal();observer.disconnect();}
+ },{threshold:.16});
+ observer.observe(section);
 })();
 </script>
 
