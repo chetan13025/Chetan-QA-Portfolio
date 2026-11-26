@@ -574,17 +574,31 @@ window.addEventListener('hashchange',()=>{
  const flow=document.getElementById('frameworkFlow');
  if(!flow)return;
  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- if(reduced){flow.classList.remove('is-visible');return;}
+ if(reduced)return;
+ let cycleTimer=null;
+ const playCycle=()=>{
+   flow.classList.remove('is-visible');
+   void flow.offsetWidth;
+   flow.classList.add('is-visible');
+ };
+ const start=()=>{
+   if(cycleTimer!==null)return;
+   playCycle();
+   cycleTimer=window.setInterval(playCycle,3600);
+ };
+ const stop=()=>{
+   if(cycleTimer!==null){window.clearInterval(cycleTimer);cycleTimer=null;}
+   flow.classList.remove('is-visible');
+ };
  if('IntersectionObserver' in window){
    const observer=new IntersectionObserver(entries=>{
      entries.forEach(entry=>{
-       flow.classList.toggle('is-visible',entry.isIntersecting);
+       if(entry.isIntersecting)start();
+       else stop();
      });
    },{threshold:.25});
    observer.observe(flow);
- }else{
-   flow.classList.add('is-visible');
- }
+ }else start();
 })();
 </script>
 
