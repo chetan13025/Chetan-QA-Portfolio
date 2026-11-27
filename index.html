@@ -996,7 +996,7 @@ window.addEventListener('hashchange',()=>{
 </script>
 
 
-<script>
+<script><script>
 (()=>{
  const terminal=document.querySelector('.hero-art .terminal');
  if(!terminal)return;
@@ -1005,15 +1005,31 @@ window.addEventListener('hashchange',()=>{
  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  if(reduced){rows.forEach(row=>row.classList.add('is-in'));return;}
  terminal.classList.add('checklist-animated');
- let played=false;
- const reveal=()=>{
-   if(played)return;
-   played=true;
-   rows.forEach((row,index)=>setTimeout(()=>row.classList.add('is-in'),160+index*320));
+ let inView=false, running=false, timers=[];
+ const clearTimers=()=>{timers.forEach(clearTimeout);timers=[];};
+ const later=(fn,ms)=>timers.push(setTimeout(fn,ms));
+ const runSequence=()=>{
+   if(running||!inView||document.visibilityState!=='visible')return;
+   running=true;
+   rows.forEach(row=>row.classList.remove('is-in'));
+   rows.forEach((row,index)=>later(()=>{
+     if(inView&&document.visibilityState==='visible')row.classList.add('is-in');
+   },160+index*320));
+   const sequenceDuration=160+(rows.length-1)*320+480;
+   later(()=>{
+     running=false;
+     if(inView&&document.visibilityState==='visible')runSequence();
+   },sequenceDuration+1000);
  };
- if(!('IntersectionObserver' in window)){reveal();return;}
+ const sync=()=>{
+   if(inView&&document.visibilityState==='visible')runSequence();
+   else{clearTimers();running=false;}
+ };
+ document.addEventListener('visibilitychange',sync);
+ if(!('IntersectionObserver' in window)){inView=true;sync();return;}
  const observer=new IntersectionObserver(entries=>{
-   if(entries.some(entry=>entry.isIntersecting)){reveal();observer.disconnect();}
+   inView=entries.some(entry=>entry.isIntersecting);
+   sync();
  },{threshold:.3});
  observer.observe(terminal);
 })();
