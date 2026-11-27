@@ -712,6 +712,15 @@ html{scroll-padding-top:112px}
  #framework .jenkins-stage-view.is-running .jenkins-timebar i{animation:none;transform:scaleX(1)}
 }
 
+
+/* Hero automation checklist: sequential entrance */
+.hero-art .terminal.checklist-animated .checkline{opacity:0;transform:translateX(-16px);transition:opacity .48s ease,transform .48s cubic-bezier(.2,.75,.25,1)}
+.hero-art .terminal.checklist-animated .checkline .check{transform:scale(.65);transition:transform .42s cubic-bezier(.2,.8,.2,1)}
+.hero-art .terminal.checklist-animated .checkline.is-in{opacity:1;transform:translateX(0)}
+.hero-art .terminal.checklist-animated .checkline.is-in .check{transform:scale(1)}
+@media(prefers-reduced-motion:reduce){
+ .hero-art .terminal.checklist-animated .checkline,.hero-art .terminal.checklist-animated .checkline .check{opacity:1!important;transform:none!important;transition:none!important}
+}
 </style>
 </head>
 <body>
@@ -986,4 +995,27 @@ window.addEventListener('hashchange',()=>{
 })();
 </script>
 
+
+<script>
+(()=>{
+ const terminal=document.querySelector('.hero-art .terminal');
+ if(!terminal)return;
+ const rows=[...terminal.querySelectorAll('.checkline')];
+ if(!rows.length)return;
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(reduced){rows.forEach(row=>row.classList.add('is-in'));return;}
+ terminal.classList.add('checklist-animated');
+ let played=false;
+ const reveal=()=>{
+   if(played)return;
+   played=true;
+   rows.forEach((row,index)=>setTimeout(()=>row.classList.add('is-in'),160+index*320));
+ };
+ if(!('IntersectionObserver' in window)){reveal();return;}
+ const observer=new IntersectionObserver(entries=>{
+   if(entries.some(entry=>entry.isIntersecting)){reveal();observer.disconnect();}
+ },{threshold:.3});
+ observer.observe(terminal);
+})();
+</script>
 </body></html>
