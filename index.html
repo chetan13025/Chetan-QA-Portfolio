@@ -667,6 +667,51 @@ html{scroll-padding-top:112px}
   .skill{padding:10px 6px}
 }
 
+
+/* CI/CD Jenkins dashboard usability and responsive polish */
+#framework .section-head{max-width:820px}
+#framework .section-head>p{max-width:760px;line-height:1.65}
+#framework .jenkins-view-head{padding:2px 2px 12px;border-bottom:1px solid #29455e}
+#framework .jenkins-view-head strong{font-size:1rem;letter-spacing:.01em}
+#framework .jenkins-view-head span{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid #32627e;border-radius:20px;background:#12344a;font-size:.64rem}
+#framework .jenkins-view-head span:before{content:"";width:7px;height:7px;border-radius:50%;background:#55c995;box-shadow:0 0 8px #55c995}
+#framework .jenkins-swipe-hint{display:none}
+#framework .jenkins-table-wrap{scrollbar-width:thin;scrollbar-color:#4c7896 #172b40}
+#framework .jenkins-table-wrap::-webkit-scrollbar{height:7px}
+#framework .jenkins-table-wrap::-webkit-scrollbar-track{background:#172b40;border-radius:8px}
+#framework .jenkins-table-wrap::-webkit-scrollbar-thumb{background:#4c7896;border-radius:8px}
+#framework .jenkins-table th:first-child,
+#framework .jenkins-table td:first-child{position:sticky;left:0;z-index:2;box-shadow:5px 0 9px rgba(0,0,0,.16)}
+#framework .jenkins-table th:first-child{z-index:3}
+#framework .jenkins-legend{gap:17px;font-size:.72rem}
+#framework .jenkins-legend i{width:9px;height:9px}
+#framework .jenkins-view-footer{align-items:center;font-size:.69rem;line-height:1.5}
+#framework .jenkins-view-footer span:first-child{display:inline-flex;align-items:center;gap:7px}
+#framework .jenkins-view-footer span:first-child:before{content:"";width:7px;height:7px;border-radius:50%;background:#55c995;box-shadow:0 0 8px #55c995}
+@media(max-width:700px){
+ #framework{padding:46px 0 54px}
+ #framework .section-head{margin-bottom:24px}
+ #framework .section-title{font-size:clamp(1.8rem,8vw,2.25rem);line-height:1.14}
+ #framework .section-head>p{font-size:.94rem!important;line-height:1.65}
+ #framework .framework-copy{padding:0 2px}
+ #framework .framework-copy h3{font-size:1.18rem;margin-bottom:10px}
+ #framework .framework-copy p{font-size:.88rem;line-height:1.65;margin-bottom:12px}
+ #framework .framework-flow.jenkins-stage-view{padding:13px 10px}
+ #framework .jenkins-view-head{align-items:flex-start;flex-direction:column;gap:9px}
+ #framework .jenkins-view-head strong{font-size:.9rem}
+ #framework .jenkins-swipe-hint{display:flex;justify-content:space-between;align-items:center;margin:0 2px 7px;color:#9dc7e2;font-size:.68rem}
+ #framework .jenkins-swipe-hint span{color:#69dcff;font-size:1rem}
+ #framework .jenkins-table-wrap{overflow-x:auto;overscroll-behavior-x:contain;padding-bottom:5px}
+ #framework .jenkins-table{min-width:610px}
+ #framework .jenkins-table th:first-child,#framework .jenkins-table td:first-child{position:sticky;left:0}
+ #framework .jenkins-legend{gap:10px 14px;font-size:.66rem}
+ #framework .jenkins-view-footer{display:grid;grid-template-columns:1fr;gap:7px;font-size:.65rem}
+}
+@media(prefers-reduced-motion:reduce){
+ #framework .jenkins-cell.current{animation:none}
+ #framework .jenkins-stage-view.is-running .jenkins-timebar i{animation:none;transform:scaleX(1)}
+}
+
 </style>
 </head>
 <body>
@@ -765,8 +810,9 @@ Jenkinsfile              # CI pipeline definition</pre>
 <article class="project"><div class="project-heading"><div class="project-icon">▯</div><h3>FTA – Field Team Automation</h3></div><p>Automated mobile scenarios for tour-plan creation and implemented parallel execution across Android devices.</p><div class="project-detail"><strong>Contribution:</strong> 100+ Appium mobile scenarios, reducing test execution time by 60%.</div><div class="tags"><span class="tag">Appium</span><span class="tag">Android</span><span class="tag">TestNG</span></div></article>
 </div></div></section>
 </div></div></section>
-<section id="framework"><div class="container"><div class="section-head"><div class="kicker">CI/CD workflow</div><h2 class="section-title">Jenkins pipeline stage view.</h2><p class="muted" style="font-size:1.05rem;margin:12px 0 0">A Jenkins-style view of a QA automation pipeline, with GitLab as the source repository and Jenkins orchestrating build, test and reporting stages.</p></div><div class="framework-copy"><h3>Build visibility. Test feedback.</h3><p>A GitLab push or merge request can trigger Jenkins to check out the latest code, run the Maven build, execute configured UI, mobile and API automation suites, and publish test reports.</p><p>The stage view below is an illustrative design, not a live Jenkins connection. Build identifiers, durations and outcomes are sample values.</p></div><div class="framework-flow jenkins-stage-view" id="frameworkFlow" aria-label="Illustrative Jenkins build history and pipeline stages">
+<section id="framework"><div class="container"><div class="section-head"><div class="kicker">CI/CD workflow</div><h2 class="section-title">CI/CD Pipeline & Test Execution</h2><p class="muted" style="font-size:1.05rem;margin:12px 0 0">Track automated build, test execution and report publishing across UI, mobile and API test suites.</p></div><div class="framework-copy"><h3>Build visibility. Test feedback.</h3><p>A GitLab push or merge request can trigger Jenkins to check out the latest code, run the Maven build, execute configured UI, mobile and API automation suites, and publish test reports.</p><p>The stage view below is an illustrative design, not a live Jenkins connection. Build identifiers, durations and outcomes are sample values.</p></div><div class="framework-flow jenkins-stage-view" id="frameworkFlow" aria-label="Illustrative Jenkins build history and pipeline stages">
 <div class="jenkins-view-head"><strong>Jenkins · QA Automation Pipeline</strong><span>GITLAB INTEGRATION</span></div>
+<p class="jenkins-swipe-hint" aria-hidden="true">Swipe to view all pipeline stages <span>→</span></p>
 <div class="jenkins-table-wrap">
 <table class="jenkins-table" aria-label="Sample Jenkins build stage history">
 <thead><tr><th>Build History</th><th>Checkout</th><th>Maven Build</th><th>Test Execution</th><th>Publish Reports</th></tr></thead>
