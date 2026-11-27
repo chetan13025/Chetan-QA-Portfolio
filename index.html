@@ -609,6 +609,64 @@ html{scroll-padding-top:112px}
   }
 }
 
+
+/* Mobile-first hero and layout refinements */
+@media(max-width:700px){
+  body{padding-top:66px;overflow-x:hidden}
+  header{min-height:66px}
+  .container{width:calc(100% - 32px)}
+  .nav{min-height:66px;gap:10px}
+  .brand{font-size:1rem;gap:8px}
+  .mark{font-size:1.35rem}
+  .menu{padding:8px 11px;font-size:.82rem}
+  .nav-links{top:66px;max-height:calc(100dvh - 66px);overflow-y:auto}
+  .hero{padding:34px 0 28px;scroll-margin-top:66px}
+  .hero-grid{grid-template-columns:minmax(0,1fr);gap:12px}
+  .hero-grid>div:first-child{min-width:0}
+  .eyebrow{display:block;font-size:.65rem;letter-spacing:.12em;line-height:1.5;margin:0 0 8px}
+  .hero h1{font-size:clamp(2.65rem,11vw,3.35rem);line-height:1.02;letter-spacing:-.06em;margin:8px 0 14px}
+  .hero h2{font-size:1.16rem;line-height:1.35;margin:0 0 12px}
+  .lead{font-size:.91rem;line-height:1.7;margin:0 0 20px;max-width:100%}
+  .actions{display:grid;grid-template-columns:minmax(0,1fr);gap:9px}
+  .actions .btn{width:100%;min-height:46px;padding:11px 14px;font-size:.88rem}
+  .hero-art{width:100%;min-width:0;min-height:300px;padding:42px 0 38px;overflow:visible}
+  .hero-art .orbit{width:min(290px,76vw)}
+  .hero-art .terminal{width:100%;max-width:390px;padding:16px;border-radius:18px}
+  .terminal-top{padding-bottom:11px;margin-bottom:13px}
+  .terminal h3{font-size:1rem}
+  .checkline{font-size:.82rem;gap:9px;margin:9px 0}
+  .float{font-size:.68rem;padding:6px 8px;white-space:nowrap}
+  .hero-art .f1,.hero-art .f2{top:5px}
+  .hero-art .f1{left:0}
+  .hero-art .f2{right:0}
+  .hero-art .f3{right:0;bottom:3px}
+  section{scroll-margin-top:82px}
+  .section-head{margin-bottom:22px}
+  .section-title{font-size:clamp(1.8rem,8vw,2.25rem);line-height:1.15}
+  .impact-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .impact-card{min-width:0;padding:15px 10px}
+  .skill-group .skills,.skills{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .skill-tags{gap:8px}
+  .skill-tags>span{max-width:100%;overflow-wrap:anywhere}
+  .about-grid,.projects,.bottom{grid-template-columns:minmax(0,1fr)}
+  .architecture-grid{grid-template-columns:minmax(0,1fr)}
+  .architecture-card.wide{grid-column:auto}
+  .architecture-flow{align-items:stretch}
+  .architecture-flow span{max-width:100%;overflow-wrap:anywhere}
+  .jenkins-table-wrap,.table-wrap{max-width:100%}
+  img,video,iframe{max-width:100%}
+}
+@media(max-width:390px){
+  .container{width:calc(100% - 26px)}
+  .hero{padding-top:28px}
+  .hero h1{font-size:2.55rem}
+  .hero-art{min-height:280px;padding-top:38px;padding-bottom:34px}
+  .hero-art .terminal{padding:14px}
+  .hero-art .f1,.hero-art .f2{font-size:.62rem}
+  .impact-number{font-size:1.65rem}
+  .skill{padding:10px 6px}
+}
+
 </style>
 </head>
 <body>
